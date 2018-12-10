@@ -29,7 +29,7 @@
 \usepackage{amsmath}
 
 \title{\LARGE \bf
-Mejora de im\'agenes t\'ermicas aereas basado en morfolog\'ia matem\'atica multiescala con operadores de cambios secuenciales
+Mejora de im\'agenes t\'ermicas a\'ereas basado en morfolog\'ia matem\'atica multiescala con operadores de cambios secuenciales
 }
 
 %\author{ \parbox{3 in}{\centering Derlis Gonzalez*
@@ -48,13 +48,13 @@ Mejora de im\'agenes t\'ermicas aereas basado en morfolog\'ia matem\'atica multi
 %}
 
 \author{Derlis Gonz\'alez$^{1}$ % <-this % stops a space
-\thanks{*This work was not supported by any organization}% <-this % stops a space
-\thanks{$^{1}$H. Kwakernaak is with Faculty of Electrical Engineering, Mathematics and Computer Science,
-        University of Twente, 7500 AE Enschede, The Netherlands
-        {\tt\small h.kwakernaak at papercept.net}}%
-\thanks{$^{2}$P. Misra is with the Department of Electrical Engineering, Wright State University,
-        Dayton, OH 45435, USA
-        {\tt\small p.misra at ieee.org}}%
+%\thanks{*This work was not supported by any organization}% <-this % stops a space
+%\thanks{$^{1}$H. Kwakernaak is with Faculty of Electrical Engineering, Mathematics and Computer Science,
+%        University of Twente, 7500 AE Enschede, The Netherlands
+%        {\tt\small h.kwakernaak at papercept.net}}%
+%\thanks{$^{2}$P. Misra is with the Department of Electrical Engineering, Wright State University,
+%        Dayton, OH 45435, USA
+%        {\tt\small p.misra at ieee.org}}%
 }
 
 
@@ -70,7 +70,7 @@ Mejora de im\'agenes t\'ermicas aereas basado en morfolog\'ia matem\'atica multi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
 
-El mejoramiento de im\'agenes infrarrojas es una t\'ecnica crucial para el mejoramiento de la calidad de im\'agenes infrarrojas. Y, los detalles claros de la imagen son informaciones importantes para el an\'alisis de im\'agenes infrarrojas. Para mejorar efectivamente la imagen infrarroja y hacer claros los detalles de las imagen, un algoritmo basado en operador de cambio secuencial multiescala es propuesto en este paper. Primeramente, el operador de cambio secuencial, que usa apertura y cerradura como primitivas, es constru\'ido y discutido. Segundo, la extracci\'on caracter\'istica en im\'agenes infrarrojas a trav\'es del operador de cambio secuencial es dado, y la extensi\'on multiescala de la extracci\'on caracter\'istica es discutido en detalle. Finalmente, las caracter\'isticas final extra\'idas de im\'agenes infrarrojas son constru\'idos e importados en la imagen original infrarroja para producir la imagen mejorada. En la imagen mejorada, las caracter\'isticas de la imagen son bien mejoradas y los detalles de las imagen son claras. Im\'agenes infrarrojas que son obtenidos de diferentes entornos son usados en el experimento. Los resultados muestran que, el algoritmo propuesto es muy efectivo para el mejoramiento de la imagen infrarroja.
+El mejoramiento de im\'agenes infrarrojas es una t\'ecnica crucial para el mejoramiento de la calidad de im\'agenes infrarrojas. Y, los detalles claros de la imagen son informaciones importantes para el an\'alisis de im\'agenes infrarrojas. Para mejorar efectivamente la imagen infrarroja y hacer claros los detalles de la imagen, un algoritmo basado en operador de cambio secuencial multiescala es propuesto en este paper. Este trabajo presenta una transformada top-hat para el mejoramiento de im\'agenes infrarrojas a\'ereas. El m\'etodo propuesto est\'a basado en el uso de elementos estructurantes incrementales de geometr\'ia similar de operaciones fundamentales de morfolog\'ia matem\'atica. Primeramente, el operador de cambio secuencial, que usa apertura y cerradura como primitivas, es constru\'ido y discutido. Segundo, la extracci\'on caracter\'istica en im\'agenes infrarrojas a trav\'es del operador de cambio secuencial es dado, y la extensi\'on multiescala de la extracci\'on caracter\'istica es discutido en detalle. Finalmente, las caracter\'isticas finales extra\'idas de im\'agenes infrarrojas son constru\'idos e importados en la imagen original infrarroja para producir la imagen mejorada. En la imagen mejorada, las caracter\'isticas de la imagen son bien mejoradas y los detalles de las imagen son claras. Im\'agenes infrarrojas que son obtenidos de diferentes entornos son usados en el experimento. Los resultados muestran que, el algoritmo propuesto es muy efectivo para el mejoramiento de la imagen infrarroja.
 
 \end{abstract}
 
@@ -78,174 +78,261 @@ El mejoramiento de im\'agenes infrarrojas es una t\'ecnica crucial para el mejor
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{INTRODUCCI\'ON}
 
-La imagen infrarroja es un tipo de información muy importante en aplicaciones ópticas basadas en infrarrojos, tal como sistema de imagen infrarroja [1], sistema de vigilancia infrarroja [2,3] y reconocimiento de objetivo [4-6]. Sin embargo, debido al efecto del equipamiento de imagen o entorno, la imagen infrarroja obtenida generalmente no es clara y tiene un bajo contraste. Especialmente, en las regiones importantes en im\'agenes infrarrojas donde no sobresale. Esos podr\'ian afectar el an\'alisis de esas im\'agenes. Por lo tanto, el mejoramiento de im\'agenes infrarrojas ser\'ian muy importantes.
-Actualmente, un muchos casos, la imagen infrarroja que realmente necesita ser mejorado generalmente tiene baja calidad, y el contraste y los detalles de la imagen no son buenas. Por lo tanto, lo crucial de la mejora de la imagen infrarroja es mejorar la imagen y dejar claros los detalles. Para mejorar la imagen infrarroja y detalles, muchos m\'etodos han sido propuestos. Incrementar la resoluci\'on de la imagen es siempre \'util para aplicaciones basadas en im\'agenes [7]. Tambi\'en, modelar el procedimiento f\'isico de la imagen podr\'ia mejorar im\'agenes infrarrojas [8,9]. Pero, si el entorno de la imagen es malo o la distribuci\'on de la imagen es limitado, el rendimiento de esos m\'etodos podr\'ian ser afectados. Mejorar la imagen a trav\'es del efecto visual es efectivo en algunos casos [10,11]. Sin embargo, generalmente necesitan informaci\'on de color, que podr\'ia no ser apropiado para el mejoramiento de im\'agenes infrarrojas con valores de grises. Filtrado de ruido o mejoramiento de eje ha sido usado para mejorar im\'agenes infrarrojas [12]. Pero. el rendimiento no ser\'ia efectivo si la calidad de im\'agenes infrarrojas es baja. A pesar de que los algoritmos basados  en histograma [13-16] son usados ampliamente para el mejoramiento de la imagen, el rendimiento para el mejoramiento de los detalles de la imagen no son buenos. Esto podr\'ia afectar la aplicaci\'on del mejoramiento de la imagen para el an\'alisis i reconocimiento de objetivo. El ajuste de contraste es un modo efectivo para el mejoramiento de la imagen infrarroja [17-19]. Sin embargo, los detalles de la imagen en el mejoramiento de la imagen podr\'ia no ser claros. Morfolog\'ia matem\'atica es una teor\'ia importante en el procesamiento de la imagen [20], que ha sido tambi\'en usado en el procesamiento de la imagen mejorada, incluyendo el mejoramiento de la imagen mejorada [18,20-22].
-Mejoramiento de pequeños objetivos en imagen infrarroja es \'util para la detecci\'on de objetivos infrarrojos [21,22]. Pero, no son f\'aciles de ampliar para mejorar otros tipos de imagen infrarrojas. Contruir operadores morfol\'ogicos efectivos usando las propiedades de imagen infrarroja es una manera \'util para el mejoramiento de la imagen infrarroja [23]. Pero, algunos detalles de la imagen podr\'ian ser suavizados y el efecto atm\'osfera podr\'ian afectar el rendimiento del algoritmo. En resumen, la mayor\'ia de los algoritmos no pudieron ser efectivamente usado para el mejoramiento de la imagen infrarroja , especialmente para el mejoramiento de los detalles de im\'agenes infrarrojas.
+La imagen infrarroja es un tipo de información muy importante en aplicaciones ópticas basadas en infrarrojos, tal como sistema de imagen infrarroja \cite{c1}, sistema de vigilancia infrarroja [2,3] y reconocimiento de objetivo \cite{c4,c6} [4-6]. Sin embargo, debido al efecto del equipamiento de imagen o entorno, la imagen infrarroja obtenida generalmente no es clara y tiene un bajo contraste. Especialmente, en las regiones importantes en im\'agenes infrarrojas donde no sobresale. Eso podr\'ia afectar el an\'alisis de esas im\'agenes. Por lo tanto, el mejoramiento de im\'agenes infrarrojas ser\'ia muy importante.
+
+Actualmente, en muchos casos, la imagen infrarroja que realmente necesita ser mejorada generalmente tiene baja calidad, y el contraste y los detalles de la imagen no son buenas. Por lo tanto, lo crucial de la mejora de la imagen infrarroja es mejorar la imagen y dejar claros los detalles. Para mejorar la imagen infrarroja y detalles, muchos m\'etodos han sido propuestos. Incrementar la resoluci\'on de la imagen es siempre \'util para aplicaciones basadas en im\'agenes [7]. Tambi\'en, modelar el procedimiento f\'isico de la imagen podr\'ia mejorar im\'agenes infrarrojas [8,9]. Pero, si el entorno de la imagen es malo o la distribuci\'on de la imagen es limitada, el rendimiento de esos m\'etodos podr\'ian ser afectados. Mejorar la imagen a trav\'es del efecto visual es efectivo en algunos casos [10,11]. Sin embargo, generalmente necesitan informaci\'on de color, que podr\'ia no ser apropiado para el mejoramiento de im\'agenes infrarrojas con valores de grises. Filtrado de ruido o mejoramiento de eje ha sido usado para mejorar im\'agenes infrarrojas [12]. Pero. el rendimiento no ser\'ia efectivo si la calidad de im\'agenes infrarrojas es baja. A pesar de que los algoritmos basados  en histograma [13-16] son usados ampliamente para el mejoramiento de la imagen, el rendimiento para el mejoramiento de los detalles de la imagen no son buenos. Esto podr\'ia afectar la aplicaci\'on del mejoramiento de la imagen para el an\'alisis y reconocimiento de objetivo. El ajuste de contraste es un modo efectivo para el mejoramiento de la imagen infrarroja [17-19]. Sin embargo, los detalles de la imagen en el mejoramiento de la imagen podr\'ia no ser claros. Morfolog\'ia matem\'atica es una teor\'ia importante en el procesamiento de la imagen [20], que ha sido tambi\'en usado en el procesamiento de la imagen mejorada, incluyendo el mejoramiento de la imagen mejorada [18,20-22].
+
+Mejoramiento de pequeños objetivos en imagen infrarroja es \'util para la detecci\'on de objetivos infrarrojos [21,22]. Pero, no son f\'aciles de ampliar para mejorar otros tipos de im\'agenes infrarrojas. Construir operadores morfol\'ogicos efectivos usando las propiedades de imagen infrarroja es una manera \'util para el mejoramiento de la imagen infrarroja [23]. Pero, algunos detalles de la imagen podr\'ian ser suavizados y el efecto atm\'osfera podr\'ian afectar el rendimiento del algoritmo. En resumen, la mayor\'ia de los algoritmos no pudieron ser efectivamente usado para el mejoramiento de la imagen infrarroja , especialmente para el mejoramiento de los detalles de im\'agenes infrarrojas.
+
 El operador de cambio es un operador morfol\'ogico \'util que podr\'ia identificar detalles de imagen [20,24-26]. Adem\'as, redefiniendo el operador de cambio usando apertura y cerradura como primitivas podr\'ia extraer detalles de im\'agenes [24]. Esto significa que el operador de cambio podr\'ia ser usado para el mantenimiento de los detalles de la imagen mejorada. Por lo tanto, se podr\'ia construir un algoritmo efectivo basado en operador de cambio usando apertura y cerradura como primitivas que podr\'ian mejorar las im\'agenes infrarrojas y detalles de la imagen. 
-A luz de esto, un algoritmo efectivo para el mejoramiento de im\'agenes infrarrojas basado en operador de cambio secuencial multiescala es propuesto en este paper. Primeramente, el operador de cambio usando apertura y cerradura como primitivas es mostrado. Segundo, la extracci\'on caracter\'istica a trav\'es de la extensi\'on multiescala es dado en detalle. Finalmente, las caracter\'isticas final extra\'idas de im\'agenes infrarrojas son calculadas basadas en caracter\'isticas multiescala extra\'idas, y la imagen infrarroja mejorada es producido importando las caracter\'isticas final extra\'idas en la imagen infrarroja final. Las contribuciones principales en este paper son: (1) proponer el operador de cambio secuencial; (2) la extensi\'on multiescala de la extracci\'on caracter\'istica para la aplicaci\'on de mejoramiento de im\'agenes infrarrojas; (3) aplicar la extracci\'on de caracter\'isticas para la aplicaci\'on de mejoramiento de imagen infrarroja.
+
+La transformada top-hat es un m\'etodo importante para el procesamiento de la imagen. Con la transformada top-hat las regiones de brillo y oscuridad son obtenidas, entonces la imagen es mejorada agregando regiones y removiendo las regiones oscuras de la imagen original \cite{12}, \cite{14}, \cite{15}.
+
+En este trabajo una transformada top-hat es presentado, que usa las operaciones b\'asicas de morfolog\'ia matem\'atica, elementos estructurantes de geometr\'ia similar.
+
+A luz de esto, un algoritmo efectivo para el mejoramiento de im\'agenes infrarrojas basado en operador de cambio secuencial multiescala es propuesto en este paper. Primeramente, el operador de cambio secuencial usando apertura y cerradura como primitivas es mostrado. Segundo, la extracci\'on caracter\'istica a trav\'es de la extensi\'on multiescala es dado en detalle. Finalmente, las caracter\'isticas finales extra\'idas de im\'agenes infrarrojas son calculadas basadas en caracter\'isticas multiescala extra\'idas, y la imagen infrarroja mejorada es producido importando las caracter\'isticas final extra\'idas en la imagen infrarroja final. Las contribuciones principales en este paper son: (1) proponer el operador de cambio secuencial; (2) la extensi\'on multiescala de la extracci\'on caracter\'istica para la aplicaci\'on de mejoramiento de im\'agenes infrarrojas; (3) aplicar la extracci\'on de caracter\'isticas para la aplicaci\'on de mejoramiento de imagen infrarroja.
+
 Resultados experimentales en im\'agenes muestran que, las caracter\'isticas de la imagen est\'an mejoradas y los detalles de la imagen son claros. Por lo tanto, el algoritmo propuesto podr\'ia ser usado para el mantenimiento de detalles del mejoramiento de la imagen infrarroja.
-
+\\
 \section{MORFOLOG\'IA MATEM\'ATICA}
-
+\\
 \subsection{Definiciones b\'asicas}
 
 La mayor\'ia de las operaciones morfol\'ogicas son derivadas de dos operaciones b\'asicas: la dilataci\'on y erosi\'on [20]. La dilataci\'on de la imagen f(x,y) usando elemento estructurante B(u,v) es definido como sigue.
 $$
-f\oplus B = max_{u,v}(f(x-u,y-v) + B(u,v)) 
+I\oplus H = max_{u,v}(I(x-u,y-v) + H(u,v)) 
 $$
 \( \oplus \) denota la operaci\'on de dilataci\'on. (x,y) y (u,v) son las coordenadas de pixeles en la imagen f y elemento estructurante B, respectivamente. La erosi\'on de la imagen f(x,y) usando el elemento estructurante B(u,v) es definido como sigue.
 $$
-f \ominus B = min_{u,v}(f(x+u,y+v)-B(u,v))
+I \ominus H = min_{u,v}(I(x+u,y+v)-H(u,v))
 $$
 
 \( \ominus \) denota la  operaci\'on de erosi\'on 
 Apertura y cerradura, que son las combinaciones de la dilataci\'on y erosi\'on a trav\'es de diferentes modos, son definidos como sigue.
 
 $$
-f \circ B = (f \ominus B) \oplus B,
+I \circ H = (I \ominus H) \oplus H,
 $$
 $$
-f \bullet B = (f \oplus B) \ominus B.
+I \bullet H = (I \oplus H) \ominus H.
 $$
-\( \ocirc \) y \( \obullet \) representan las operaciones de apertura y cerradura, respectivamente.
+$ \circ $ y $ \bullet $ representan las operaciones de apertura y cerradura, respectivamente.
 La apertura y cerradura son usualmente usados para suavizar brillo y regiones oscuras, respectivamente. Esta propiedad podr\'ia ser usado para la extracci\'on de caracter\'isticas.
 
 \subsection{Operador de cambio con apertura y cerradura como primitivas}
 
 El operador de cambio ha sido una herramienta \'util en aplicaciones de procesamiento de imagen despu\'es que ha sido propuesto [20,24,25]. Primitivas y reglas son dos factores principales en el operador de cambio. Suponga $ f_1(x,y) $ y $ f_2(x,y) $ son las primitivas, un tipo de operador de cambio es definido como sigue [20,24,25].
 
-\[ TO(f)(x,y) = 
+
+\begin{scriptsize}
+\centering
+\[ TO(I)(x,y) = 
     \begin{cases}
-    $ f_1(x,y)$, \quad \text{if }  $ f_2(x,y)-f(x,y) < f(x,y)-f_1(x,y) $ \\
-    $ f_2(x,y)$, \quad \text{if } $ f_2(x,y)-f(x,y) > f(x,y)-f_1(x,y) $ \\
-    f(x,y), \quad \text{else }
+    $ I_1(x,y)$, \quad \text{if }  $ I_2(x,y)-I(x,y) < I(x,y)-I_1(x,y) $ \\
+    $ I_2(x,y)$, \quad \text{if } $ I_2(x,y)-I(x,y) > I(x,y)-I_1(x,y) $ \\
+    I(x,y), \quad \text{else }
     \end{cases}
 \]
-
-La selecci\'on de reglas en este operador de cambio indica, este operador extrae los pixeles de im\'agenes que son mas diferentes de la imagen original f en las primitivas $ f_1(x,y) $ y $ f_2(x,y) $. Esos pixeles de la imagen generalmente representa caracter\'isticas importantes en la imagen. Por lo tanto, este tipo de operador de cambio ser\'ia \'util para la extracci\'on de caracter\'isticas.
+\end{scriptsize}
+\normalsize
+La selecci\'on de reglas en este operador de cambio indica, este operador extrae los pixeles de im\'agenes que son mas diferentes de la imagen original f en las primitivas $ I_1(x,y) $ y $ I_2(x,y) $. Esos pixeles de la imagen generalmente representa caracter\'isticas importantes en la imagen. Por lo tanto, este tipo de operador de cambio ser\'ia \'util para la extracci\'on de caracter\'isticas.
 La definici\'on de las primitivas en TO afecta el rendimiento de TO para la extracci\'on de caracter\'isticas. La apertura y cerradura son operadores efectivos para suavizar im\'agenes caracter\'isticas. Usando apertura y cerradura como primitivas en TO ser\'ia \'util para la extracci\'on de caracter\'isticas importantes [24]. Esto es efectivo para identificar los detalles de im\'agenes infrarrojas. El operador de cambio usando apertura y cerradura como primitivas ser\'ia expresado como sigue [24].
 
+\tiny 
 \begin{equation} \label{eq:operadorcambio}
-    
- TO(f)(x,y) = 
+ \centering    
+ TO(I)(x,y) = 
     \begin{cases}
-    f \circ B(x,y), \quad \text{if } f \bullet B(x,y)-f(x,y) < f(x,y)-f \circ B(x,y) \\
-     f \bullet B(x,y), \quad \text{if } f \bullet B(x,y)-f(x,y) > f(x,y)-f \circ B(x,y) \\
-    f(x,y), \quad \text{else }
+    I \circ H(x,y), \quad \text{if } I \bullet H(x,y)-I(x,y) < I(x,y)-f \circ H(x,y) \\
+     I \bullet H(x,y), \quad \text{if } I \bullet H(x,y)-I(x,y) > I(x,y)-I \circ H(x,y) \\
+    I(x,y), \quad \text{else }
     \end{cases}
 
 \end{equation}
-
+\normalsize
 En esta definici\'on, la diferencia entre la imagen original y el resultado de la apertura o cerradura es comparado. Y, los pixeles en el resultado de TO son del resultado de la apertura o cerradura. Cada pixel tiene una diferencia relativamente mas grande que la imagen original y el resultado de la apertura o cerradura. Una gran diferencia indica que el suavizamiento de las caracter\'isticas de la imagen por apertura o cerradura son mas sobresaliente en la imagen. Esas caracter\'isticas son caracter\'isticas importantes en la imagen. Por lo tanto, esta definici\'on de TO ser\'ia \'util para la extracci\'on de caracter\'isticas.
 Actualmente, las caracter\'isticas de im\'agenes importantes en la imagen infrarroja son generalmente regiones sobresalientes en comparaci\'on con otras regiones. Y, mejorar la imagen infrarroja ser\'ia mejorar las caracter\'isticas de la imagen que son diferentes de otras regiones. TO en la expresi\'on (1) ser\'ia usado para extraer caracter\'isticas que sobresale en la imagen. Por lo tanto, la definici\'on de TO en la expresi\'on (1) ser\'ia usado para el mejoramiento de im\'agenes infrarrojas.
-
+\\
 \section{MEJORAMIENTO DE IMAGEN INFRARROJA}
 
 \subsection{Construcci\'on del operador de cambio secuencial} 
-La imagen contiene caracter\'isticas en diferentes escalas. Extraer caracter\'isticas multiescala ser\'ia efectivo para el procesamiento de imagen. En morfolog\'ia matem\'atica, usar elementos estructurantes multiescala con tamaños incrementales es una buena manera de extraer caracter\'isticas multiescala [23,24,26-28]. Suponga B1,...,$B_n$ son elementos estructurantes multiescala con tamaños incrementales. $ B_i = \underbrace{B_i \oplus B_1 ... \oplus B_1 }_\text{dilataci\'on i veces}, $ $ 1 \leq i \leq n $. 
+La imagen contiene caracter\'isticas en diferentes escalas. Extraer caracter\'isticas multiescala ser\'ia efectivo para el procesamiento de imagen. En morfolog\'ia matem\'atica, usar elementos estructurantes multiescala con tamaños incrementales es una buena manera de extraer caracter\'isticas multiescala [23,24,26-28]. Suponga B1,...,$B_n$ son elementos estructurantes multiescala con tamaños incrementales. $$ B_i = \underbrace{B_i \oplus B_1 ... \oplus B_1 }_\text{dilataci\'on i veces}, 1 \leq i \leq n $$. 
 
 Basado en esos elementos estructurantes multiescala, el operador de cambio secuencial ser\'ia definido como sigue.
 $\\\\
-TO_i(f) = TO_i(TO_{i-1}(f)).
+TO_i(I) = TO_i(TO_{i-1}(I)).
 $
 $\\
-TO_0(f) = f.\\\\
+TO_0(I) = I.\\\\
 $
 Una ilustraci\'on del operador de cambio secuencial $TO_i$ usando los elementos estructurantes multiescala se muestra en la Fig. 1. En esta definici\'on. el operador de cambio secuencial usa elementos estructurantes para secuencialmente procesar caracter\'isticas de la imagen correspondiente a diferentes escalas. Por lo tanto, bas\'andose en el operador de cambio secuencial, la existencia de caracter\'isticas de imagen en diferentes escala podr\'ia ser identificado. Entonces, las caracter\'isticas de imagen de cada escala ser\'ia para el an\'alsis de la imagen. Esto ser\'ia \'util para el mejoramiento de imagen infrarroja.
 Las regiones importantes en la imagen infrarroja son generalmente caracter\'isticas brillosas u oscuras que son diferentes de otras regiones. Por lo tanto, ser\'ia significativa para el mejoramiento de imagen infrarroja para extraer y utilizar las caracter\'isticas multiescala contenida de la imagen infrarroja original.
 
 \subsection{Extracci\'on de caracter\'isticas basada en operador de cambio secuencial}
-$TO_i(f)$ secuencialmente suaviza las caracter\'isticas de la imagen en las escalas de 1 a i. $TO_{i-1}(f)$ secuencialmente suaviza las caracter\'isticas de la imagen en las escalas de 1 a i - 1. Entonces, las caracter\'isticas de la imagen suavizado por el operador de cambio secuencial correspondiente a la escala i ser\'ia extra\'ido comparando $TO_i(f) $ con $TO_{i-1}(f)$.
-El resultado del operador de cambio secuencial suaviza caracter\'isticas de imagen brillosas y oscuras. $TO_{i-1}(f)$ suaviza las caracter\'isticas de imagen oscura y brillosas en las escalas de 1 a i - 1. $TO_i(f)$ suaviza las caracter\'isticas de imagen brillosas y oscuras en las escala de 1 a i. Los valores grises de las caracter\'isticas de imagen suavizadas ser\'a deprimido por el operador de cambio secuencial. Por lo tanto, comparando los valores grises de $TO_i(f)$ y $TO_{i-1}(f)$, las caracter\'isticas brillosas suavizadas en la escala i ser\'ia extra\'ido por el operador de cambio secuencial. Actualmente, la estrategia de comparaci\'on entre pixeles ha sido verificada como una manera efectiva de extracci\'on de caracter\'isticas de im\'agenes basada en operadores morfol\'ogicas [18,20-26]. Esta estrategia podr\'ia ser tambien usado en este paper por el operador de cambio secuencial para la extracci\'on de caracter\'isticas, que ser\'ia expresado como sigue.
+
+$TO_i(I)$ secuencialmente suaviza las caracter\'isticas de la imagen en las escalas de 1 a i. $TO_{i-1}(I)$ secuencialmente suaviza las caracter\'isticas de la imagen en las escalas de 1 a i - 1. Entonces, las caracter\'isticas de la imagen suavizado por el operador de cambio secuencial correspondiente a la escala i ser\'ia extra\'ido comparando $TO_i(I) $ con $TO_{i-1}(I)$.
+El resultado del operador de cambio secuencial suaviza caracter\'isticas de imagen brillosas y oscuras. $TO_{i-1}(I)$ suaviza las caracter\'isticas de imagen oscura y brillosas en las escalas de 1 a i - 1. $TO_i(I)$ suaviza las caracter\'isticas de imagen brillosas y oscuras en las escala de 1 a i. Los valores grises de las caracter\'isticas de imagen suavizadas ser\'a deprimido por el operador de cambio secuencial. Por lo tanto, comparando los valores grises de $TO_i(I)$ y $TO_{i-1}(I)$, las caracter\'isticas brillosas suavizadas en la escala i ser\'ia extra\'ido por el operador de cambio secuencial. Actualmente, la estrategia de comparaci\'on entre pixeles ha sido verificada como una manera efectiva de extracci\'on de caracter\'isticas de im\'agenes basada en operadores morfol\'ogicas [18,20-26]. Esta estrategia podr\'ia ser tambien usado en este paper por el operador de cambio secuencial para la extracci\'on de caracter\'isticas, que ser\'ia expresado como sigue.
+\begin{small}
+
+
 $$
-BSFTO_i(f)(x,y) = max(TO_{i-1}(x,y) - TO_i(f)(x,y),0).
+BSFTO_i(I)(x,y) = max(TO_{i-1}(x,y) - TO_i(I)(x,y),0).
 $$
 
-$BFSTO_i(f)$ es las caracter\'isticas brillosas extra\'idas en la escala i usando el operador de cambio secuencial.
-Similarmente, $TO_{i-1}(f) $ suaviza las caracter\'isticas de imagen oscuras en las escala de 1 a i - 1. $TO_i{f}$ suaviza las caracter\'isticas de image oscuras en la escala de 1 a i. Los valores grises de las caracater\'isticas de imagen oscuras son pequeñas. Entonces, los valores grises en las caracter\'isticas de la imagen oscuras suavizadas ser\'a incrementada por TO. Por lo tanto, comparando los valores grises de $TO_i(f)$ y $TO_{i-1}(f)$, las caracter\'isticas oscuras suavizadas en la escala i ser\'ia extra\'ida por el operador de cambio secuencial como sigue.
+\end{small}
+$BFSTO_i(I)$ es las caracter\'isticas brillosas extra\'idas en la escala i usando el operador de cambio secuencial.
+Similarmente, $TO_{i-1}(I) $ suaviza las caracter\'isticas de imagen oscuras en las escala de 1 a i - 1. $TO_i(I)$ suaviza las caracter\'isticas de image oscuras en la escala de 1 a i. Los valores grises de las caracater\'isticas de imagen oscuras son pequeñas. Entonces, los valores grises en las caracter\'isticas de la imagen oscuras suavizadas ser\'a incrementada por TO. Por lo tanto, comparando los valores grises de $TO_i(I)$ y $TO_{i-1}(I)$, las caracter\'isticas oscuras suavizadas en la escala i ser\'ia extra\'ida por el operador de cambio secuencial como sigue.
+
+\begin{small}
 $$
-DFSTO_i(f)(x,y) = max(TO_i(x,y) - TO_{i-1}(f)(x,y),0).
+DFSTO_i(I)(x,y) = max(TO_i(x,y) - TO_{i-1}(I)(x,y),0).
 $$
+
+\end{small}
+
 Variando la escala i, las caracater\'isticas de imagen efectiva identificada por el operador de cambio secuencial en diferentes escalas ser\'ia extra\'ida. Esas caracter\'isticas de imagen son principalmente extra\'idas basadas en valores de gris, que corresponde a las caracter\'isticas efectivas en imagen infrarroja. Por lo tanto, esas caracter\'isticas extra\'idas ser\'ia muy \'util para el mejoramiento de la imagen infrarroja.
 
 \subsection{Extracci\'on final para mejoramiento}
-Las caracter\'isticas de brillo final $BFSTO_i(f)$ solo contiene las caracter\'isticas de imagen correspondiente a la escala i. Agregar  caracter\'isticas de imagen multiescala ha sido una manera efectiva para extracci\'on de caracter\'isticas en diferentes aplicaciones [18,20,22-26]. As\'i, las caracter\'isticas de brillo extra\'ido de diferentes escalas (denotado por FBFSTOA) por el operador de cambio secuencial en este paper podr\'ia ser tambi\'en efectivamente combinado a trav\'es de la suma entre p\'ixeles de $BFSTO_i(f)$ de todas las escalas como sigue.
+
+Las caracter\'isticas de brillo final $BFSTO_i(I)$ solo contiene las caracter\'isticas de imagen correspondiente a la escala i. Agregar  caracter\'isticas de imagen multiescala ha sido una manera efectiva para extracci\'on de caracter\'isticas en diferentes aplicaciones [18,20,22-26]. As\'i, las caracter\'isticas de brillo extra\'ido de diferentes escalas (denotado por FBFSTOA) por el operador de cambio secuencial en este paper podr\'ia ser tambi\'en efectivamente combinado a trav\'es de la suma entre p\'ixeles de $BFSTO_i(I)$ de todas las escalas como sigue.
+
 $$
 FBFSTOA(x,y) = \sum_{i} [BFSTO_i(x,y)].
 $$
-Adem\'as, las caracter\'isticas de brillo extra\'ida de imagen infrarroja usualmente tienen valores de grises grandes en $BFSTO_i(f)$. Entonces, las caracter\'isticas de brillo importante, que usualmente representa los detalles de la imagen, tendr\'ia los valores de grises m\'as grandes en todas las escalas. Adem\'as, la operaci\'on de m\'aximo entre pixeles, que ha sido efectivamente usado por otros operadores morfol\'ogicas para la extracci\'on de caracter\'isticas de imagen importantes [18-26], ser\'ia tambien usado en este paper por el operador de cambio secuencial para la extracci\'on de brillo caracter\'isticos importantes. Por lo tanto, las caracter\'isticas de brillos importantes (denotado por FBFSTOM) ser\'ia obtenido aplicando la operaci\'on de m\'aximo entre pixeles en $BFSTO_i(f)$ de todas las escalas como sigue.
+
+Adem\'as, las caracter\'isticas de brillo extra\'ida de imagen infrarroja usualmente tienen valores de grises grandes en $BFSTO_i(I)$. Entonces, las caracter\'isticas de brillo importante, que usualmente representa los detalles de la imagen, tendr\'ia los valores de grises m\'as grandes en todas las escalas. Adem\'as, la operaci\'on de m\'aximo entre pixeles, que ha sido efectivamente usado por otros operadores morfol\'ogicas para la extracci\'on de caracter\'isticas de imagen importantes [18-26], ser\'ia tambien usado en este paper por el operador de cambio secuencial para la extracci\'on de brillo caracter\'isticos importantes. Por lo tanto, las caracter\'isticas de brillos importantes (denotado por FBFSTOM) ser\'ia obtenido aplicando la operaci\'on de m\'aximo entre pixeles en $BFSTO_i(I)$ de todas las escalas como sigue.
+
 $$
 FBFSTOM(x,y) = max_i[BFSTO_i(x,y)].
 $$
+
 Para mejorar las caracter\'isticas de brillo de la imagen, especialmente los detalles de brillo de la imagen, las caracter\'isticas de brillo importante extra\'ida FBFSTOM podr\'ia ser agregado en FBFSTOA. Por lo tanto, las caracter\'isticas de brillo final extra\'ido de im\'agenes infrarrojas ser\'ia la combinaci\'on de las caracter\'isticas de brillo extra\'idas de todas las escalas como sigue.
+
 $$FBFSTO = FBFSTOA + FBFSTOM$$.
 
 FBFSTO representa las caracter\'isticas final de brillo extra\'ida de imagen infrarroja a trav\'es del operador de cambio secuencial, que podr\'ia ser usado para el mejoramiento de las caracter\'isticas de brillo de imagen, especialmente el mejoramiento de los detalles brillosas de la imagen.
-De manera similar, debido a que las caracter\'isticas oscuras extra\'idas  $DFSTO_i(f)$ solo contiene las caracter\'isticas de imagen correspondiente a la escala i, las caracter\'isticas oscuras extra\'idas de diferentes escalas (denotado por FDFSTOA) podr\'ia ser combinado a trav\'es de la sumatoria entre pixeles de $DFSTOA_i(f)$ de todas las escalas como sigue.
+
+De manera similar, debido a que las caracter\'isticas oscuras extra\'idas  $DFSTO_i(I)$ solo contiene las caracter\'isticas de imagen correspondiente a la escala i, las caracter\'isticas oscuras extra\'idas de diferentes escalas (denotado por FDFSTOA) podr\'ia ser combinado a trav\'es de la sumatoria entre pixeles de $DFSTOA_i(I)$ de todas las escalas como sigue.
+
 $$
 FDFSTOA(x,y) = \sum_{i} [DFSTO_i(x,y)].
 $$
-Adem\'as, las caracter\'isticas oscuras extra\'idas de imagen infrarroja tienen grandes valores de grises en $DFSTO_i(f)$. Entonces, las caracter\'isticas de imagen oscuras importantes, que usualmente representa los detalles de la imagen oscura, tendr\'ia los valores de grises mas grandes en todas las escalas. Por lo tanto, las caracter\'isticas oscuras importantes (denotado por FDFSTOM) podr\'ia ser obtenido por la operaci\'on de m\'aximo en $DFSTO_i(f)$ de todas las escalas como sigue.
+
+Adem\'as, las caracter\'isticas oscuras extra\'idas de imagen infrarroja tienen grandes valores de grises en $DFSTO_i(I)$. Entonces, las caracter\'isticas de imagen oscuras importantes, que usualmente representa los detalles de la imagen oscura, tendr\'ia los valores de grises mas grandes en todas las escalas. Por lo tanto, las caracter\'isticas oscuras importantes (denotado por FDFSTOM) podr\'ia ser obtenido por la operaci\'on de m\'aximo en $DFSTO_i(I)$ de todas las escalas como sigue.
+
 $$
 FDFSTOM(x,y) = max_i[DFSTO_i(x,y)].
 $$
 
 Para mejorar las caracter\'isticas de oscuras de la imagen, especialmente los detalles oscuros de la imagen, las caracter\'isticas oscuras importante extra\'ida FDFSTOM podr\'ia ser agregado en FDFSTOA. Por lo tanto, las caracter\'isticas oscuras final extra\'ido de im\'agenes infrarrojas ser\'ia la combinaci\'on de las caracter\'isticas oscuras extra\'idas de todas las escalas como sigue.
+
 $$FDFSTO = FDFSTOA + FDFSTOM$$.
 
 FDFSTO representa las caracter\'isticas final oscuras extra\'ida de imagen infrarroja a trav\'es del operador de cambio secuencial, que podr\'ia ser usado para el mejoramiento de las caracter\'isticas oscuras de imagen, especialmente el mejoramiento de los detalles oscuras de la imagen.
-Un ejemplo de la extracci\'on de caracter\'isticas es mostrado en Fig.2.(a) es la imagen original infrarroja. (b) y (c) son las caracter\'isticas de brillo y oscuridad final extra\'idas de la imagen infrarroja, respectivamente. Los valores de grises de la Fig.2(b) y (c) son ajustado dentro del intervalo de grises [1,70] para claramente mostrar las caracter\'isticas de brillo y oscuridad. Fig. 2(b) y (c) muestra que, esas caracter\'isticas final extra\'idas representa la regiones importantes de brillo y oscuridad y detalles de la imagen original infrarroja. Especialmente, Fig. 2(b) contiene las caracter\'isticas importantes de la regi\'on objetiva. Por lo tanto, esas caracter\'isticas podr\'ia ser usado para mejorar la imagen infrarroja original efectivamente.
+
+Un ejemplo de la extracci\'on de caracter\'isticas es mostrado en Fig.2.(a) es la imagen original infrarroja. (b) y (c) son las caracter\'isticas de brillo y oscuridad final extra\'idas de la imagen infrarroja, respectivamente. Los valores de grises de la Fig.2(b) y (c) son ajustado dentro del intervalo de grises [1,70] para claramente mostrar las caracter\'isticas de brillo y oscuridad. Fig. 2(b) y (c) muestra que, esas caracter\'isticas final extra\'idas representa la regiones importantes de brillo y oscuridad y detalles de la imagen original infrarroja.
+Especialmente, Fig. 2(b) contiene las caracter\'isticas importantes de la regi\'on objetiva. Por lo tanto, esas caracter\'isticas podr\'ia ser usado para mejorar la imagen infrarroja original efectivamente.
 
 \subsection{Mejoramiento de la imagen infrarroja}
+
 Una manera efectiva de mejoramiento de la imagen infrarroja es mejorar los detalles de la imagen a trav\'es de la ampliaci\'on de contraste de la imagen infrarroja original [23]. FBFSTO es la caracter\'istica de brillo final extra\'ida de la imagen infrarroja por el operador de cambio secuencial, y FDFSTO es la caracter\'istica oscuras final extra\'ida. Entonces, siguiendo la ampliaci\'on de contraste [23], el contraste de la imagen infrarroja original podr\'ia ser ampliada como sigue. 
+
 $$
-f_{EN} = w_1  *  f + w_2 * FBFSTO - w_3 *FDFSTO
+I_{EN} = w_1  *  I + w_2 * FBFSTO - w_3 *FDFSTO
 $$
+
 $f_{EN}$ representa la imagen infrarroja final mejorada, $w_1$, $w_2$ y $w_3$ son los pesos para ajustar el contraste del resultado de la imagen.
-FBFSTO y FDFSTO son las caracter\'isticas final de brillo y oscuridad. respectivamente. Importando esas caracter\'isticas de imagen que contiene los detalles de la imagen en la imagen infrarroja original podr\'ia mejorar los detalles de la imagen en la imagen infrarroja. Tambien, el contraste de las caracter\'isticas de brillo y oscuridad son ampliadas a trav\'es del mejoramiento de contraste. Adem\'as, e contraste del resultado de la imagen final  podr\'ia ser ajustado a trav\'es de los pesos para obtener un resultado de mejoramiento efectivo. Por lo tanto, el contraste y los detalles de imagen de la imagen infrarroja original son mejoradas, lo que resulta en un resultado efectivo del mejoramiento de la imagen infrarroja.
+
+FBFSTO y FDFSTO son las caracter\'isticas final de brillo y oscuridad respectivamente. Importando esas caracter\'isticas de imagen que contiene los detalles de la imagen en la imagen infrarroja original podr\'ia mejorar los detalles de la imagen en la imagen infrarroja. Tambien, el contraste de las caracter\'isticas de brillo y oscuridad son ampliadas a trav\'es del mejoramiento de contraste. Adem\'as, e contraste del resultado de la imagen final  podr\'ia ser ajustado a trav\'es de los pesos para obtener un resultado de mejoramiento efectivo. Por lo tanto, el contraste y los detalles de imagen de la imagen infrarroja original son mejoradas, lo que resulta en un resultado efectivo del mejoramiento de la imagen infrarroja.
+
 El procedimiento del algoritmo propuesto se muestra en la Fig. 3. Primeramente, las caracter\'isticas de brillo y oscuridad multiescala de la imagen infrarroja son extra\'idas. Segundo, las caracter\'isticas final de brillo y oscuridad son calculadas desde las caracter\'isticas de brillo y oscuridad multiescala extra\'idas. Finalmente, la imagen infrarroja es mejorada usando el modo de ampliaci\'on de contraste. Fig. 4 muestra el resultado final del mejoramiento de la imagen infrarroja original en la Fig. 1(a). Fig. 4 indica que, la imagen y los detalles son mejorados efectivamente. Y, el objetivo es m\'as claro que la imagen infrarroja original. Este resultado mejorado beneficiar\'ia el an\'alisis posterior de la imagen infrarroja.
+
 \subsection{Selecci\'on de par\'ametros}
-El elemento estructurante es un par\'ametro importante en el algoritmo propuesto. El elemento estructurante ampliamente utilizado es un elemento estructurante plano. En el elemento estructurante plano, solo el tamaño y la forma del elemento estructurante ser\'ia decidido. Por lo tanto, si la forma y tamaño fueran decididos, entonces el elemento estructurante usado en cada escala corresponde al n\'umero de la escala.  En este caso, el par\'ametro principal del elemento estructurante plano que ser\'ia decidido es la forma del elemento estructurante. La forma circular ha sido ampliamente utilizado en diferentes aplicaciones [20]. Y, no hay esquinas agudas en el circulo, que podr\'ia suprimir algunos efectos de bloques. As\'i, la forma circular es usado en este paper. Por lo tanto, el elemento estructurante usado en este paper es el elemento estructurante plano con forma circular.
+
+El elemento estructurante es un par\'ametro importante en el algoritmo propuesto.
+El elemento estructurante ampliamente utilizado es un elemento estructurante plano. En el elemento estructurante plano, solo el tamaño y la forma del elemento estructurante ser\'ia decidido. Por lo tanto, si la forma y tamaño fueran decididos, entonces el elemento estructurante usado en cada escala corresponde al n\'umero de la escala.  En este caso, el par\'ametro principal del elemento estructurante plano que ser\'ia decidido es la forma del elemento estructurante. La forma circular ha sido ampliamente utilizado en diferentes aplicaciones [20]. Y, no hay esquinas agudas en el circulo, que podr\'ia suprimir algunos efectos de bloques. As\'i, la forma circular es usado en este paper. Por lo tanto, el elemento estructurante usado en este paper es el elemento estructurante plano con forma circular.
+
 El n\'umero de escala n determina las caracter\'isticas de las im\'agenes extra\'idas. Usando n\'umero de escala grande podr\'ia extraer m\'as caracter\'isticas de imagen. Generalmente, no hay necesidad de extraer caracter\'isticas de imagen en escala muy alta debido a que los detalles de la imagen infrarroja en escalas altas no son muy ricos [23]. Entonces, no hay necesidad de usar numeros de escalas grandes. Los resultados experimentales en im\'agenes infrarrojas muestran que, usando n\'umero de escala entre [3,7] es efectivo para la mayor\'ia de las im\'agenes. En este paper, usamos n\'umero de escala n = 5. Y, los resultados experimentales verific\'o que usando n = 5 fue efectivo para el mantenimiento del mejoramiento de los detalles de la imagen infrarroja.
+
 Los valores de los pesos $w_1$, $w_2$, $w_3$ son usados para el ajustar el contraste del mejoramiento final de la imagen infrarroja y as\' mejorar aun m\'as los detalles de la imagen. Generalmente, hay valores positivos entre [0,3]. Para mejorar bien las caracter\'isticas de la imagen extra\'ida y obtener un buen contraste, $w_1$ ser\'ia pequeño, y $w_2$ y $w_3$ ser\'ia grande. En este paper, definimos $w_1$ = 0.6, $w_2$ = 1.5 y $w_3$ = 1.5. Los resultados experimentales verific\'o que, esos pesos fueron efectivos.
 
 \section{Resultados experimentales}
+
 Para verificar el rendimiento efectivo del algoritmo propuesto, im\'agenes infrarrojas con diferentes tipos de desorden de fondos y obtenidos bajo diferentes circunstancias son usados en este experimento. Para ser una comparaci\'on justa, el conjunto de datos usados de las im\'agenes infrarrojas originales es el mismo que [23]. Adem\'as, algunos algoritmos podr\'ian ser usados para mejoramiento de im\'agenes infrarrojas, incluyendo el algoritmo de ecualizaci\'on de histograma (HE)[15,16], algoritmo de equalizaci\'on  de histograma de contraste adaptativo limitado (CLAHE) [16], algoritmo basado en morfolog\'ia multiescala (MSM) [28] y algoritmo basado en la nueva transformada top-hat multiescala (MSNTH) [23], son usados en este paper como algoritmos de comparaci\'on. HE y CLAHE son algoritmos ampliamente usados para mejoramiento de imagen, que podr\'ian ser usado para el mejoramiento de la imagen infrarroja. MSM es el algoritmo efectivo para el mejoramiento de imagen basada en morfolog\'ia matem\'atica multiescala. MSNTH es un algoritmo efectivo para el mejoramiento de imagen infrarroja, que es tambi\'en est\'a basado en la teor\'ia de la matem\'atica morofol\'ogica multiescala y podr\'ia ser usado para el mejoramiento bien de la imagen infrarroja. Por lo tanto, HE, CLAHE, MSM, MSNTH son adoptados en este paper para hacer la comparaci\'on. Los experimentos de comparaci\'on cuantitativa y visual son mostrados abajo.
+
 \subsection{Comparaci\'on visual}
+
 Fig. 5 es un ejemplo de comparaci\'on en la imagen infrarroja con objetivos a\'ereos y fondos de cielos desordenados. (a) es la imagen infrarroja original. (b) es el resultado mejorado de HE. (c) es el resultado mejorado de CLAHE. (d) es el resultado mejorado de MSM. (e) es el resultado mejorado de MSNTH. (f) es el resultado mejorado del algoritmo propuesto. La imagen original no tiene un buen contraste y la imagen no est\'a clara. Los resultados mejorados de HE y CLAHE mejora las regiones de brillo de la imagen original. Pero, las regiones a\'ereas no es clara en comparaci\'on con la imagen original. Adem\'as, los ruidos son pesados en esos resultados. MSM mejora la imagen infrarroja, pero los ruidos de la imagen mejorada son tambien pesados. El resultado de MSNTH tiene buen  contraste y el objetivo es brilloso. Pero, las alas de las naves no est\'an bien mejorados. El algoritmo propuesto mejora la imagen original. En la imagen mejorada, el contraste es bueno y los ruidos contenidos son pocos. Adem\'as, la regi\'on completa de la nave objetivo es mejorada, incluyendo las alas. Por lo tanto, el algoritmo propuesto realiza mejor que otros algoritmos.
+
 Fig. 6 es un ejemplo de comparaci\'on en imagen infrarroja con objetivo en la nave y fondos de cielo y mar desordenados. (a) es la imagen infrarroja original. (b) es el resultado mejorado de HE. (c) es el resultado mejorado de CLAHE. (d) es el resultado mejorado de MSM. (e) es el resultado mejorado de MSNTH. (f) es el resultado mejorado del algoritmo propuesto. Debido a la niebla atmosf\'erica, la imagen infrarroja original no es clara y los objetivos no son claros. Por lo tanto, la distribuci\'on de grises de la imagen infrarroja original est\'a limitada. HE sobremejora las regiones objetivas y algun desorden del fondo del oc\'eano. Y, un objetivo muy oscuro podr\'ia no ser observado en el resultado mejorado.  CLAHE mejora la imagen completa, pero las regiones objetivas aun no son claras. MSM mejora la imagen original, y las regiones objetivas son claras. Sin embargo, muchos ruidos son producidos en la imagen resultado. MSNTH mejora el contraste de la imagen. Las regiones objetivasson claras y hay pocos ruidos en el resultado. Sin embargo, los detalles de la imagen en el fondo del oc\'eano y cielo no son claros. El algoritmo propuesto mejora la imagen original y las regiones objetivas.
+
 El contraste de la imagen resultante es buena. Tambien, las regiones objetivas son claras, y los detalles de la imagen son preservados. Sin embargo, los ruidos son menos que el resultado de MSM. Por lo tanto, el algoritmo propuesto realiza mejor que otros algoritmos.
+
 Fig. 7 es un ejemplo de comparaci\'on en imagen infrarroja con objetivos de naves oscuras y fondo de oc\'eano desordenado. (a) la imagen infrarroja original. (b) es el resultado mejorado de HE. (c) es el resultado mejorado de CLAHE. (d) es el resultado mejorado de MSM. (e) es el resultado mejorado de MSNTH. (f) es el resultado mejorado del algoritmo propuesto. El objetivo en la imagen original es muy negra. Y, la imagen original no es clara. HE sobremejora las regiones del cielo. Por lo tanto, las regiones objetivas de las naves alrededor de la parte baja de la regi\'on del cielo esta mas invisible. CLAHE mejora la imagen completa. 
+
 Pero, algunas regiones desordenados del oc\'eano en la parte baja de la imagen est\'an sobremejorados. Por lo tanto, la nave objetiva no es muy clara. MSM mejora la imagen original y la regi\'on objetiva de la nave. Pero, algunas regiones en el area del oc\'eano est\'an sobremejoradas y muchos ruidos son producidos. MSNTH mejora la imagen y regiones objetivas. A pesar de que los ruidos son menos, el efecto de la niebla atmosf\'erica son aun pesados en el resultado. Y, algunas regiones en el area del oc\'eano estan sobremejoradas.
+
 El resultado del algoritmo propuesto tiene buen contraste y la nave objetiva de la imagen mejorada son claras. Por lo tanto, los ruidos son menos que el resultado de MSM, y los detalles de la imagen son claras. Entonces, el rendimiento del algoritmo propuesto es el mejor entre esos algoritmos.
+
 Figs.8-10 son algunos otros resultados de mejoramiento del algoritmo propuesto. (a) es la imagen infrarroja original. (b) es la imagen infrarroja mejorada del algoritm propuesto. Fig. 8 es un ejemplo de la imagen infrarroja con objetivos de naves oscuras y fondo de cielo desordenado. A pesar de que el objetivo es negro y los detalles estan limitados en el fondo del cielo desordenado, el algoritmo propuesto mejora la region objetiva, y los detalles en el fondo del cielo son m\'as claros que la imagen original. Esto ser\'ia \'util para el an\'alisis de la imagen infrarroja.
+
 Fig. 9 es un ejemplo de la imagen infrarroja con objetivos de naves oscuras y fondo de cielo y oc\'eano desordenados. Debido   a la niebla atmosf\'erica, la imagen original no es clara y la distribuci\'on de grises es limitada. Las naves objetivas no son muy claras. Luego del mejoramiento, la nave objetiva son mas brillosas que la imagen original. Y, algunos objetivos invisibles en la imagen infrarroja original son tambi\'en claras en la imagen mejorada. Esos objetivos tienen los detalles de imagen importante. Sin embargo, los detalles de la otra imagen en el \'area del cielo y oc\'eano son claras. Por lo tanto, el algoritmo propuesto mejora bien la imagen infrarroja original.
+
 Fig.10 es otro ejemplo de la imagen infrarroja con naves objetivas oscuras y fondo de cielo y oc\'eano desordenados. Hay varias naves objetivas en el area cercana a la l\'inea del oc\'eano-cielo. Y, los detalles en el \'area del oc\'eano no son claras. Sin embargo, debido al efecto de la atm\'osfera especial por encima del oc\'eano, la imagen infrarroja no son claras. Despues del mejoramiento por el algoritmo propuesto, las 3 naves objetivas alrededor de la l\'inea del \'area oc\'eano-cielo son muy claras. Y, los detalles en el cielo y oc\'eano son claras. Tambien, el contraste de la imagen infrarroja es buena.
+
 Esto ser\'ia \'util para reconocimiento de objetivo o an\'alisis de imagen. Por lo tanto, el algoritmo propuesto mejora bien la imagen infrarroja original.
 Diferentes tipos de im\'agenes infrarrojas obtenidos bajo diferentes entornos son usados en este experimento. Los resultados muestra que, el algoritmo propuesto podr\'ia mejorar bien las im\'agenes infrarrojas y los detalles de la imagen. Adem\'as, el algoritmo propuesto realiza mejor que algunos otros algoritmos. Por lo tanto, el algoritmo propuesto es efectivo para el mantenimiento del mejoramiento de los detalles de la imagen infrarroja.
+
 \subsection{Comparaci\'on cuantitativa}
+
 Para mostrar el buen rendimiento del algoritmo propuesto y realizar una comparaci\'on cuantitativa, la medida ampliamente usada para medir el \'indice lineal de borrosidad [23,29] es adoptado en este paper. Mejorar la imagen infrarroja podr\'ia mejorar los detalles \'utiles de la imagen infrarroja, tal como sea posible regiones de interest y detalles de la imagen en el fondo. Tambien, el contraste de la imagen mejorada ser\'ia bueno. Por lo tanto, la imagen infrarroja mejorada contendr\'ia mas informaci\'on espacial \'util y clara. El \'indice de borrosidad lineal es definido basado en la informaci\'on espacial de una imagen infrarroja, que ha sido usado efectivamente para medir el rendimiento del mejoramiento de la imagen infrarroja [23,29]. El \'indice de borrosidad lineal (denotado por $\gamma$) podr\'ia ser calculado como sigue [23,29].
 
 $$
-\gamma(f) = \frac{2}{M \times N}\displaystyle\sum_{x=1}^{m}\sum_{y=1}^{n}min\{p_{xy},(1-p_{xy})\},
+\gamma(I) = \frac{2}{M \times N}\displaystyle\sum_{x=1}^{m}\sum_{y=1}^{n}min\{p_{xy},(1-p_{xy})\},
 $$
+
 $$
 p_{xy} = \sin 
  \begin{bmatrix}
-    \frac{\pi}{2} \times (1 - \frac{f_{xy}}{f_{max}})
+    \frac{\pi}{2} \times (1 - \frac{I_{xy}}{I_{max}})
  \end{bmatrix}
 $$
 
-En la definici\'on, M $\times$ N es el tamaño de la imagen, $f_{xy}$ es el valor gris del pixel (x,y), $f_{max}$ es el m\'aximo valor gris de $f$. Un valor pequeño de $\gamma$ indica que. el rendimiento del algoritmo correspondiente oara el mejoramiento de la imagen infrarroja es mejor.
+En la definici\'on, M $\times$ N es el tamaño de la imagen, $I_{xy}$ es el valor gris del pixel (x,y), $I_{max}$ es el m\'aximo valor gris de $I$. Un valor pequeño de $\gamma$ indica que. el rendimiento del algoritmo correspondiente para el mejoramiento de la imagen infrarroja es mejor.
+
 HE, CLAHE, MSM, MSNTH y el algoritmo propuesto son realizados en diferentes tipos de imagen infrarroja. Y, los resultados mejorados de cada algoritmo son usados para calcular los valores de  $\gamma$. El valor signficativo de los valores de $\gamma$ de cada algoritmo est\'a listado en la Tabla 1 para realizar la comparaci\'on cuantitativa.
+
+\begin{table}[h]
+\centering
+\tiny
+\caption{Comparaci\'on cuantitativa de mejoramiento de imagen infrarroja usando valor de $\gamma$}
+\label{tabla_1}
+\begin{center}
+\begin{tabular}{ c c c c c c c }
+\hline
+& \textbf{Imagen Original} & \textbf{HE} & \textbf{CLAHE} & \textbf{MSM} & \textbf{MSNTH} & \textbf{Algoritmo propuesto}\\
+\hline
+$\gamma$ & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 & 0.1987\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+\normalsize
+
 La Tabla 1 muestra que, los valores de $\gamma$ del algoritmo propuesto es m\'as pequeño que otros algoritmos. Esto significa que, el algoritmo propuesto realiza mejor que otros algoritmos para el mejoramiento de im\'agenes infrarrojas, especialmente para mejorar detalles de im\'agenes \'utiles e importantes. Por lo tanto, el algoritmo propuesto podr\'ia ser usado para mejoramiento de imagen infrarroja.
+
 \section{Conclusiones}
+
 Efectivamente mejorar imagen infrarroja y sus detalles es muy \'util para aplicaciones basadas en sensor infrarrojo, especialmente aplicaciones militares. Para mejorar bien imagen infrarroja y hacer los detalles de la imagen clara, es propuesto, un algoritmo morfol\'ogico multiescala basado en operador de cambio secuencial usando apertura y cerradura como primitivas, en este paper. El operador de cambio secuencial usando apertura y cerradura es construido para extraer caracter\'isticas efectivas de imagen para mejoramiento de imagen infrarroja. Tambi\'ien, la extracci\'on de caracter\'isticas multiescala usando operador de cambio secuencial es discutido. Debido a las caracter\isticas de im\'agenes multiescala extra\'idas, la imagen infrarroja podr\'ia ser bien mejorado y los detalles de imagen son muy claras en la imagen mejorada. Esto ser\'ia muy \'util para an\'alisis de imagen infrarroja, reconocimiento de objetivo y otras aplicaciones basadas en infrarrojo. Los resultados experimemtales en diferentes tipos de im\'agenes infrarrojas muestra que, el algoritmo propuesto es muy efectivo para el mantenimiento del mejoramiento de los detalles de la imagen infrarroja. Adem\'as, el algoritmo propuesto podr\'ia ser tambien usado para mejoramiento de otros tipos de im\'agenes.
+
 \section*{\textbf{Conflicto de inter\'es}}
+
 No hay conflicto de inter\'es
+
 \section*{\textbf{Reconocimiento}}
 
 El autor agradece mucho al cr\'itico y editor an\'onimo por los comentarios constructivos. Este trabajo es parcialmente reportado por la Fundaci\'on Nacional Natural de Ciencia de China (61271023) y Program for New Century Exellent Talents en Universidades (NCET-13-0020) y Programa 863 (2013AA013801).
+
 \begin{thebibliography}{99}
 
 \bibitem{c1} S. E Godoy, J.E. Pezoa, S.N. Torres, Noise-cancellation-based nomuniformity correction algorithnm for infrared local-plane arrays, Appl. Opt 47 (2008) 5394-5399.
@@ -261,74 +348,6 @@ El autor agradece mucho al cr\'itico y editor an\'onimo por los comentarios cons
 
 \end{thebibliography}
 
-\begin{itemize}
-
-\item Use either SI (MKS) or CGS as primary units. (SI units are encouraged.) English units may be used as secondary units (in parentheses). An exception would be the use of English units as identifiers in trade, such as Ò3.5-inch disk driveÓ.
-\item Avoid combining SI and CGS units, such as current in amperes and magnetic field in oersteds. This often leads to confusion because equations do not balance dimensionally. If you must use mixed units, clearly state the units for each quantity that you use in an equation.
-\item Do not mix complete spellings and abbreviations of units: ÒWb/m2Ó or Òwebers per square meterÓ, not Òwebers/m2Ó.  Spell out units when they appear in text: Ò. . . a few henriesÓ, not Ò. . . a few HÓ.
-\item Use a zero before decimal points: Ò0.25Ó, not Ò.25Ó. Use Òcm3Ó, not ÒccÓ. (bullet list)
-
-\end{itemize}
-
-
-\subsection{Equations}
-
-The equations are an exception to the prescribed specifications of this template. You will need to determine whether or not your equation should be typed using either the Times New Roman or the Symbol font (please no other font). To create multileveled equations, it may be necessary to treat the equation as a graphic and insert it into the text after your paper is styled. Number equations consecutively. Equation numbers, within parentheses, are to position flush right, as in (1), using a right tab stop. To make your equations more compact, you may use the solidus ( / ), the exp function, or appropriate exponents. Italicize Roman symbols for quantities and variables, but not Greek symbols. Use a long dash rather than a hyphen for a minus sign. Punctuate equations with commas or periods when they are part of a sentence, as in
-
-$$
-\alpha + \beta = \chi \eqno{(1)}
-$$
-
-Note that the equation is centered using a center tab stop. Be sure that the symbols in your equation have been defined before or immediately following the equation. Use Ò(1)Ó, not ÒEq. (1)Ó or Òequation (1)Ó, except at the beginning of a sentence: ÒEquation (1) is . . .Ó
-
-\subsection{Some Common Mistakes}
-\begin{itemize}
-
-
-\item The word ÒdataÓ is plural, not singular.
-\item The subscript for the permeability of vacuum ?0, and other common scientific constants, is zero with subscript formatting, not a lowercase letter ÒoÓ.
-\item In American English, commas, semi-/colons, periods, question and exclamation marks are located within quotation marks only when a complete thought or name is cited, such as a title or full quotation. When quotation marks are used, instead of a bold or italic typeface, to highlight a word or phrase, punctuation should appear outside of the quotation marks. A parenthetical phrase or statement at the end of a sentence is punctuated outside of the closing parenthesis (like this). (A parenthetical sentence is punctuated within the parentheses.)
-\item A graph within a graph is an ÒinsetÓ, not an ÒinsertÓ. The word alternatively is preferred to the word ÒalternatelyÓ (unless you really mean something that alternates).
-\item Do not use the word ÒessentiallyÓ to mean ÒapproximatelyÓ or ÒeffectivelyÓ.
-\item In your paper title, if the words Òthat usesÓ can accurately replace the word ÒusingÓ, capitalize the ÒuÓ; if not, keep using lower-cased.
-\item Be aware of the different meanings of the homophones ÒaffectÓ and ÒeffectÓ, ÒcomplementÓ and ÒcomplimentÓ, ÒdiscreetÓ and ÒdiscreteÓ, ÒprincipalÓ and ÒprincipleÓ.
-\item Do not confuse ÒimplyÓ and ÒinferÓ.
-\item The prefix ÒnonÓ is not a word; it should be joined to the word it modifies, usually without a hyphen.
-\item There is no period after the ÒetÓ in the Latin abbreviation Òet al.Ó.
-\item The abbreviation Òi.e.Ó means Òthat isÓ, and the abbreviation Òe.g.Ó means Òfor exampleÓ.
-
-\end{itemize}
-
-
-\section{USING THE TEMPLATE}
-
-Use this sample document as your LaTeX source file to create your document. Save this file as {\bf root.tex}. You have to make sure to use the cls file that came with this distribution. If you use a different style file, you cannot expect to get required margins. Note also that when you are creating your out PDF file, the source file is only part of the equation. {\it Your \TeX\ $\rightarrow$ PDF filter determines the output file size. Even if you make all the specifications to output a letter file in the source - if you filter is set to produce A4, you will only get A4 output. }
-
-It is impossible to account for all possible situation, one would encounter using \TeX. If you are using multiple \TeX\ files you must make sure that the ``MAIN`` source file is called root.tex - this is particularly important if your conference is using PaperPlaza's built in \TeX\ to PDF conversion tool.
-
-\subsection{Headings, etc}
-
-Text heads organize the topics on a relational, hierarchical basis. For example, the paper title is the primary text head because all subsequent material relates and elaborates on this one topic. If there are two or more sub-topics, the next level head (uppercase Roman numerals) should be used and, conversely, if there are not at least two sub-topics, then no subheads should be introduced. Styles named ÒHeading 1Ó, ÒHeading 2Ó, ÒHeading 3Ó, and ÒHeading 4Ó are prescribed.
-
-\subsection{Figures and Tables}
-
-Positioning Figures and Tables: Place figures and tables at the top and bottom of columns. Avoid placing them in the middle of columns. Large figures and tables may span across both columns. Figure captions should be below the figures; table heads should appear above the tables. Insert figures and tables after they are cited in the text. Use the abbreviation ÒFig. 1Ó, even at the beginning of a sentence.
-
-\begin{table}[h]
-\caption{An Example of a Table}
-\label{table_example}
-\begin{center}
-\begin{tabular}{|c||c|}
-\hline
-One & Two\\
-\hline
-Three & Four\\
-\hline
-\end{tabular}
-\end{center}
-\end{table}
-
-
    \begin{figure}[thpb]
       \centering
       \framebox{\parbox{3in}{We suggest that you use a text box to insert a graphic (which is ideally a 300 dpi TIFF or EPS file, with all fonts embedded) because, in an document, this method is somewhat more stable than directly inserting a picture.
@@ -340,11 +359,6 @@ Three & Four\\
    \end{figure}
    
 
-Figure Labels: Use 8 point Times New Roman for Figure labels. Use words rather than symbols or abbreviations when writing Figure axis labels to avoid confusing the reader. As an example, write the quantity ÒMagnetizationÓ, or ÒMagnetization, MÓ, not just ÒMÓ. If including units in the label, present them within parentheses. Do not label axes only with units. In the example, write ÒMagnetization (A/m)Ó or ÒMagnetization {A[m(1)]}Ó, not just ÒA/mÓ. Do not label axes with a ratio of quantities and units. For example, write ÒTemperature (K)Ó, not ÒTemperature/K.Ó
-
-\section{CONCLUSIONS}
-
-A conclusion section is not required. Although a conclusion may review the main points of the paper, do not replicate the abstract as the conclusion. A conclusion might elaborate on the importance of the work or suggest applications and extensions. 
 
 \addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
                                   % on the last page of the document manually. It shortens
@@ -362,53 +376,6 @@ A conclusion section is not required. Although a conclusion may review the main 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{APPENDIX}
-
-Appendixes should appear before the acknowledgment.
-
-\section*{ACKNOWLEDGMENT}
-
-The preferred spelling of the word ÒacknowledgmentÓ in America is without an ÒeÓ after the ÒgÓ. Avoid the stilted expression, ÒOne of us (R. B. G.) thanks . . .Ó  Instead, try ÒR. B. G. thanksÓ. Put sponsor acknowledgments in the unnumbered footnote on the first page.
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-References are important to the reader; therefore, each citation must be complete and correct. If at all possible, references should be commonly available publications.
-
-
-
-\begin{thebibliography}{99}
-
-\bibitem{c1} G. O. Young, ÒSynthetic structure of industrial plastics (Book style with paper title and editor),Ó 	in Plastics, 2nd ed. vol. 3, J. Peters, Ed.  New York: McGraw-Hill, 1964, pp. 15Ð64.
-\bibitem{c2} W.-K. Chen, Linear Networks and Systems (Book style).	Belmont, CA: Wadsworth, 1993, pp. 123Ð135.
-\bibitem{c3} H. Poor, An Introduction to Signal Detection and Estimation.   New York: Springer-Verlag, 1985, ch. 4.
-\bibitem{c4} B. Smith, ÒAn approach to graphs of linear forms (Unpublished work style),Ó unpublished.
-\bibitem{c5} E. H. Miller, ÒA note on reflector arrays (Periodical styleÑAccepted for publication),Ó IEEE Trans. Antennas Propagat., to be publised.
-\bibitem{c6} J. Wang, ÒFundamentals of erbium-doped fiber amplifiers arrays (Periodical styleÑSubmitted for publication),Ó IEEE J. Quantum Electron., submitted for publication.
-\bibitem{c7} C. J. Kaufman, Rocky Mountain Research Lab., Boulder, CO, private communication, May 1995.
-\bibitem{c8} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, ÒElectron spectroscopy studies on magneto-optical media and plastic substrate interfaces(Translation Journals style),Ó IEEE Transl. J. Magn.Jpn., vol. 2, Aug. 1987, pp. 740Ð741 [Dig. 9th Annu. Conf. Magnetics Japan, 1982, p. 301].
-\bibitem{c9} M. Young, The Techincal Writers Handbook.  Mill Valley, CA: University Science, 1989.
-\bibitem{c10} J. U. Duncombe, ÒInfrared navigationÑPart I: An assessment of feasibility (Periodical style),Ó IEEE Trans. Electron Devices, vol. ED-11, pp. 34Ð39, Jan. 1959.
-\bibitem{c11} S. Chen, B. Mulgrew, and P. M. Grant, ÒA clustering technique for digital communications channel equalization using radial basis function networks,Ó IEEE Trans. Neural Networks, vol. 4, pp. 570Ð578, July 1993.
-\bibitem{c12} R. W. Lucky, ÒAutomatic equalization for digital communication,Ó Bell Syst. Tech. J., vol. 44, no. 4, pp. 547Ð588, Apr. 1965.
-\bibitem{c13} S. P. Bingulac, ÒOn the compatibility of adaptive controllers (Published Conference Proceedings style),Ó in Proc. 4th Annu. Allerton Conf. Circuits and Systems Theory, New York, 1994, pp. 8Ð16.
-\bibitem{c14} G. R. Faulhaber, ÒDesign of service systems with priority reservation,Ó in Conf. Rec. 1995 IEEE Int. Conf. Communications, pp. 3Ð8.
-\bibitem{c15} W. D. Doyle, ÒMagnetization reversal in films with biaxial anisotropy,Ó in 1987 Proc. INTERMAG Conf., pp. 2.2-1Ð2.2-6.
-\bibitem{c16} G. W. Juette and L. E. Zeffanella, ÒRadio noise currents n short sections on bundle conductors (Presented Conference Paper style),Ó presented at the IEEE Summer power Meeting, Dallas, TX, June 22Ð27, 1990, Paper 90 SM 690-0 PWRS.
-\bibitem{c17} J. G. Kreifeldt, ÒAn analysis of surface-detected EMG as an amplitude-modulated noise,Ó presented at the 1989 Int. Conf. Medicine and Biological Engineering, Chicago, IL.
-\bibitem{c18} J. Williams, ÒNarrow-band analyzer (Thesis or Dissertation style),Ó Ph.D. dissertation, Dept. Elect. Eng., Harvard Univ., Cambridge, MA, 1993. 
-\bibitem{c19} N. Kawasaki, ÒParametric study of thermal and chemical nonequilibrium nozzle flow,Ó M.S. thesis, Dept. Electron. Eng., Osaka Univ., Osaka, Japan, 1993.
-\bibitem{c20} J. P. Wilkinson, ÒNonlinear resonant circuit devices (Patent style),Ó U.S. Patent 3 624 12, July 16, 1990. 
-
-
-
-
-
-
-\end{thebibliography}
-
-
 
 
 \end{document}
