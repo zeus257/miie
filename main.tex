@@ -27,6 +27,10 @@
 \usepackage[spanish, activeacute]{babel} %Definir idioma español
 \usepackage[utf8]{inputenc} %Codificacion utf-8
 \usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+
+\newcommand{\xmult}{\ding{53}}%
 
 \title{\LARGE \bf
 Mejora de im\'agenes t\'ermicas a\'ereas basado en morfolog\'ia matem\'atica multiescala con operadores de cambios secuenciales
@@ -57,6 +61,7 @@ Mejora de im\'agenes t\'ermicas a\'ereas basado en morfolog\'ia matem\'atica mul
 %        {\tt\small p.misra at ieee.org}}%
 }
 
+\graphicspath{{rsc/}
 
 \begin{document}
 
@@ -86,28 +91,28 @@ Mejoramiento de pequeños objetivos en imagen infrarroja es \'util para la detec
 
 El operador de cambio es un operador morfol\'ogico \'util que podr\'ia identificar detalles de imagen [20,24-26]. Adem\'as, redefiniendo el operador de cambio usando apertura y cerradura como primitivas podr\'ia extraer detalles de im\'agenes [24]. Esto significa que el operador de cambio podr\'ia ser usado para el mantenimiento de los detalles de la imagen mejorada. Por lo tanto, se podr\'ia construir un algoritmo efectivo basado en operador de cambio usando apertura y cerradura como primitivas que podr\'ian mejorar las im\'agenes infrarrojas y detalles de la imagen. 
 
-La transformada top-hat es un m\'etodo importante para el procesamiento de la imagen. Con la transformada top-hat las regiones de brillo y oscuridad son obtenidas, entonces la imagen es mejorada agregando regiones y removiendo las regiones oscuras de la imagen original \cite{12}, \cite{14}, \cite{15}.
+La transformada top-hat es un m\'etodo importante para el procesamiento de la imagen. Con la transformada top-hat las regiones de brillo y oscuridad son obtenidas, entonces la imagen es mejorada agregando regiones de brillo y removiendo las regiones oscuras de la imagen original \cite{12}, \cite{14}, \cite{15}. El m\'etodo propuesto fue aplicado a im\'agenes infrarrojas a\'ereas una de base de datos de im\'agenes p\'ublicas.
 
 En este trabajo una transformada top-hat es presentado, que usa las operaciones b\'asicas de morfolog\'ia matem\'atica, elementos estructurantes de geometr\'ia similar.
 
-A luz de esto, un algoritmo efectivo para el mejoramiento de im\'agenes infrarrojas basado en operador de cambio secuencial multiescala es propuesto en este paper. Primeramente, el operador de cambio secuencial usando apertura y cerradura como primitivas es mostrado. Segundo, la extracci\'on caracter\'istica a trav\'es de la extensi\'on multiescala es dado en detalle. Finalmente, las caracter\'isticas finales extra\'idas de im\'agenes infrarrojas son calculadas basadas en caracter\'isticas multiescala extra\'idas, y la imagen infrarroja mejorada es producido importando las caracter\'isticas final extra\'idas en la imagen infrarroja final. Las contribuciones principales en este paper son: (1) proponer el operador de cambio secuencial; (2) la extensi\'on multiescala de la extracci\'on caracter\'istica para la aplicaci\'on de mejoramiento de im\'agenes infrarrojas; (3) aplicar la extracci\'on de caracter\'isticas para la aplicaci\'on de mejoramiento de imagen infrarroja.
+A luz de esto, un algoritmo efectivo para el mejoramiento de im\'agenes infrarrojas basado en operador de cambio secuencial multiescala es propuesto en este paper. Primeramente, se presenta la transformada top-hat propuesto con elementos estructurantes incrementales de geometr\'ia similar. Segundo, el operador de cambio secuencial usando apertura y cerradura como primitivas es mostrado. Tercero, la extracci\'on caracter\'istica a trav\'es de la extensi\'on multiescala es dado en detalle. Finalmente, las caracter\'isticas finales extra\'idas de im\'agenes infrarrojas son calculadas basadas en caracter\'isticas multiescala extra\'idas, y la imagen infrarroja mejorada es producido importando las caracter\'isticas final extra\'idas en la imagen infrarroja final. Las contribuciones principales en este paper son: (1) proponer una transformada top-hat con elementos estructurantes incrementales de geometr\'ia similar; (2) proponer el operador de cambio secuencial; (3) aplicar la extracci\'on de caracter\'isticas para la aplicaci\'on de mejoramiento de imagen infrarroja.
 
-Resultados experimentales en im\'agenes muestran que, las caracter\'isticas de la imagen est\'an mejoradas y los detalles de la imagen son claros. Por lo tanto, el algoritmo propuesto podr\'ia ser usado para el mantenimiento de detalles del mejoramiento de la imagen infrarroja.
+Resultados experimentales en im\'agenes infrarrojas muestran que, las caracter\'isticas de la imagen est\'an mejoradas y los detalles de la imagen son claros. Por lo tanto, el algoritmo propuesto podr\'ia ser usado para el mantenimiento de detalles del mejoramiento de la imagen infrarroja.
 \\
 \section{MORFOLOG\'IA MATEM\'ATICA}
 \\
 \subsection{Definiciones b\'asicas}
 
-La mayor\'ia de las operaciones morfol\'ogicas son derivadas de dos operaciones b\'asicas: la dilataci\'on y erosi\'on [20]. La dilataci\'on de la imagen f(x,y) usando elemento estructurante B(u,v) es definido como sigue.
+La mayor\'ia de las operaciones morfol\'ogicas son derivadas de dos operaciones b\'asicas: la dilataci\'on y erosi\'on [20]. La dilataci\'on de la imagen I(x,y) usando elemento estructurante H(u,v) es definido como el m\'aximo de los valores en H agregado a los valores de la subimagen actual de I, representado como  sigue.
 $$
 I\oplus H = max_{u,v}(I(x-u,y-v) + H(u,v)) 
 $$
-\( \oplus \) denota la operaci\'on de dilataci\'on. (x,y) y (u,v) son las coordenadas de pixeles en la imagen f y elemento estructurante B, respectivamente. La erosi\'on de la imagen f(x,y) usando el elemento estructurante B(u,v) es definido como sigue.
+\( \oplus \) denota la operaci\'on de dilataci\'on, (x,y) y (u,v) son las coordenadas de p\'ixeles en la imagen I y elemento estructurante H, respectivamente. La erosi\'on de la imagen I(x,y) usando el elemento estructurante H(u,v) es definido como el m\'inimo de las diferencias, representado como sigue.
 $$
 I \ominus H = min_{u,v}(I(x+u,y+v)-H(u,v))
 $$
 
-\( \ominus \) denota la  operaci\'on de erosi\'on 
+\( \ominus \) denota la  operaci\'on de erosi\'on. \\
 Apertura y cerradura, que son las combinaciones de la dilataci\'on y erosi\'on a trav\'es de diferentes modos, son definidos como sigue.
 
 $$
@@ -119,73 +124,147 @@ $$
 $ \circ $ y $ \bullet $ representan las operaciones de apertura y cerradura, respectivamente.
 La apertura y cerradura son usualmente usados para suavizar brillo y regiones oscuras, respectivamente. Esta propiedad podr\'ia ser usado para la extracci\'on de caracter\'isticas.
 
+\subsection{Transformada Top-hat}
+La transformada top-hat originalmente propuesto en \cite{20} provee una herramienta excelente para la extracci\'on de caracter\'isticas de brillos y oscuridad respectivamente m\'as pequeño que un tamaño dado de un fondo desigual.
+
+Usando apertura y cerradura, la transformada top-hat, incluyendo la transformada top-hat por apertura y transformada top-hat por cerradura, denotado por THA y THC, son definidos como sigue, respectivamente \cite{17}.
+$$
+THA = I - I \circ H
+$$
+
+$$
+THC = I - H \bullet I
+$$
+
+La apertura suaviza regiones de brillos de la imagen y cerradura suaviza regiones oscuras. Por lo tanto, THA descubre regiones de brillo y THC provee regiones oscuras en I \cite{11}.
+
 \subsection{Operador de cambio con apertura y cerradura como primitivas}
 
-El operador de cambio ha sido una herramienta \'util en aplicaciones de procesamiento de imagen despu\'es que ha sido propuesto [20,24,25]. Primitivas y reglas son dos factores principales en el operador de cambio. Suponga $ f_1(x,y) $ y $ f_2(x,y) $ son las primitivas, un tipo de operador de cambio es definido como sigue [20,24,25].
+El operador de cambio ha sido una herramienta \'util en aplicaciones de procesamiento de imagen despu\'es que ha sido propuesto [20,24,25]. Primitivas y reglas son dos factores principales en el operador de cambio. Suponga $ I_1(x,y) $ y $ I_2(x,y) $ son las primitivas, un tipo de operador de cambio es definido como sigue [20,24,25].
 
-
-\begin{scriptsize}
+\begin{equation} \label{exp:exp1}
+\begin{tiny}
 \centering
-\[ TO(I)(x,y) = 
+%%\[ 
+OC(I)(x,y) = 
     \begin{cases}
-    $ I_1(x,y)$, \quad \text{if }  $ I_2(x,y)-I(x,y) < I(x,y)-I_1(x,y) $ \\
-    $ I_2(x,y)$, \quad \text{if } $ I_2(x,y)-I(x,y) > I(x,y)-I_1(x,y) $ \\
+     I_1(x,y), \quad \text{if }   I_2(x,y)-I(x,y) < I(x,y)-I_1(x,y) \\ 
+     I_2(x,y), \quad \text{if }  I_2(x,y)-I(x,y) > I(x,y)-I_1(x,y)  \\
     I(x,y), \quad \text{else }
     \end{cases}
-\]
-\end{scriptsize}
+%%\]
+\end{tiny}
+\end{equation}
+
 \normalsize
-La selecci\'on de reglas en este operador de cambio indica, este operador extrae los pixeles de im\'agenes que son mas diferentes de la imagen original f en las primitivas $ I_1(x,y) $ y $ I_2(x,y) $. Esos pixeles de la imagen generalmente representa caracter\'isticas importantes en la imagen. Por lo tanto, este tipo de operador de cambio ser\'ia \'util para la extracci\'on de caracter\'isticas.
-La definici\'on de las primitivas en TO afecta el rendimiento de TO para la extracci\'on de caracter\'isticas. La apertura y cerradura son operadores efectivos para suavizar im\'agenes caracter\'isticas. Usando apertura y cerradura como primitivas en TO ser\'ia \'util para la extracci\'on de caracter\'isticas importantes [24]. Esto es efectivo para identificar los detalles de im\'agenes infrarrojas. El operador de cambio usando apertura y cerradura como primitivas ser\'ia expresado como sigue [24].
+La selecci\'on de reglas en este operador de cambio indica, este operador extrae los p\'ixeles de im\'agenes que son mas diferentes de la imagen original I en las primitivas $ I_1(x,y) $ y $ I_2(x,y) $. Esos p\'ixeles de la imagen generalmente representan caracter\'isticas importantes en la imagen. Por lo tanto, este tipo de operador de cambio ser\'ia \'util para la extracci\'on de caracter\'isticas.
+
+La definici\'on de las primitivas en OC afecta el rendimiento del OC para la extracci\'on de caracter\'isticas. La apertura y cerradura son operadores efectivos para suavizar im\'agenes caracter\'isticas. Usando apertura y cerradura como primitivas en OC ser\'ia \'util para la extracci\'on de caracter\'isticas importantes [24]. Esto es efectivo para identificar los detalles de im\'agenes infrarrojas. El operador de cambio usando apertura y cerradura como primitivas ser\'ia expresado como sigue [24].
 
 \tiny 
 \begin{equation} \label{eq:operadorcambio}
  \centering    
- TO(I)(x,y) = 
+ OC(I)(x,y) = 
     \begin{cases}
-    I \circ H(x,y), \quad \text{if } I \bullet H(x,y)-I(x,y) < I(x,y)-f \circ H(x,y) \\
+    I \circ H(x,y), \quad \text{if } I \bullet H(x,y)-I(x,y) < I(x,y)-I \circ H(x,y) \\
      I \bullet H(x,y), \quad \text{if } I \bullet H(x,y)-I(x,y) > I(x,y)-I \circ H(x,y) \\
     I(x,y), \quad \text{else }
     \end{cases}
 
 \end{equation}
 \normalsize
-En esta definici\'on, la diferencia entre la imagen original y el resultado de la apertura o cerradura es comparado. Y, los pixeles en el resultado de TO son del resultado de la apertura o cerradura. Cada pixel tiene una diferencia relativamente mas grande que la imagen original y el resultado de la apertura o cerradura. Una gran diferencia indica que el suavizamiento de las caracter\'isticas de la imagen por apertura o cerradura son mas sobresaliente en la imagen. Esas caracter\'isticas son caracter\'isticas importantes en la imagen. Por lo tanto, esta definici\'on de TO ser\'ia \'util para la extracci\'on de caracter\'isticas.
-Actualmente, las caracter\'isticas de im\'agenes importantes en la imagen infrarroja son generalmente regiones sobresalientes en comparaci\'on con otras regiones. Y, mejorar la imagen infrarroja ser\'ia mejorar las caracter\'isticas de la imagen que son diferentes de otras regiones. TO en la expresi\'on (1) ser\'ia usado para extraer caracter\'isticas que sobresale en la imagen. Por lo tanto, la definici\'on de TO en la expresi\'on (1) ser\'ia usado para el mejoramiento de im\'agenes infrarrojas.
+En esta definici\'on, la diferencia entre la imagen original y el resultado de la apertura o cerradura es comparada. Y, los p\'ixeles en el resultado del OC son del resultado de la apertura o cerradura. Cada pixel tiene una diferencia relativamente m\'as grande que la imagen original y el resultado de la apertura o cerradura. Una gran diferencia indica que el suavizamiento de las caracter\'isticas de la imagen por apertura o cerradura son mas sobresaliente en la imagen.
+
+Esas caracter\'isticas son caracter\'isticas importantes en la imagen. Por lo tanto, esta definici\'on de OC ser\'ia \'util para la extracci\'on de caracter\'isticas.
+
+Actualmente, las caracter\'isticas de im\'agenes importantes en la imagen infrarroja son generalmente regiones sobresalientes en comparaci\'on con otras regiones. Y, mejorar la imagen infrarroja ser\'ia mejorar las caracter\'isticas de la imagen que son diferentes de otras regiones. OC en la expresi\'on \eqref{exp:exp1} ser\'ia usado para extraer caracter\'isticas que sobresale en la imagen. Por lo tanto, la definici\'on de OC en la expresi\'on \eqref{exp:exp1} ser\'ia usado para el mejoramiento de im\'agenes infrarrojas.
 \\
 \section{MEJORAMIENTO DE IMAGEN INFRARROJA}
+\subsection{Construcci\'on de la transformada top-hat con dos elementos estructurantes}
+
+La idea principal es aplicar la transformada top-hat, usando elementos estructurantes de geometr\'ia similar con diferentes escalas. Trabajos recientes que hacen uso de diferentes elementos estructurantes en la transformada top-hat existente en la literatura, no retiene la geometr\'ia exacta de los elementos estructurantes \cite{18},\cite{19}.
+
+Se define EE un elemento estructurante convexo, (n - 1) el n\'umero dilataciones para $EE_n$ en un rango de \textit{i} = 1,2, ... n y (m - 1) es el n\'umero de dilataciones para $EE_m$ en un rango de \textit{j} = 1,2, ... m, como sigue:
+
+$$
+EE_n = EE_{n-1} \oplus EE = \underbrace{EE \oplus EE \oplus EE \oplus ... \oplus EE}_\text{n - 1 dilataciones}
+$$
+
+$$
+EE_m = EE_{m-1} \oplus EE = \underbrace{EE \oplus EE \oplus EE \oplus ... \oplus EE}_\text{m - 1 dilataciones}
+$$
+
+Por lo tanto, definimos los elementos estructurantes $H_1$ y $H_2$ como sigue:
+
+\begin{equation} \label{eq:h1}
+H_1 = EE_n    
+\end{equation}
+
+\begin{equation} \label{eq:h2}
+H_2 = EE_m
+\end{equation}
+
+Donde $H_1$ y $H_2$ son planos y geom\'etricamentes proporcionales, debido a que la base del elemento estructurante EE es convexo.
+
+Considerando los elementos estructurantes incrementales, la transformada top-hat se define como:
+
+\begin{equation} \label{eq:th1}
+THAN = I - ((I \ominus H_1) \oplus H_2)
+\end{equation}
+
+\begin{equation} \label{eq:th2}
+THCN = ((I \oplus H_1) \ominus H_2) - I    
+\end{equation}
+
 
 \subsection{Construcci\'on del operador de cambio secuencial} 
-La imagen contiene caracter\'isticas en diferentes escalas. Extraer caracter\'isticas multiescala ser\'ia efectivo para el procesamiento de imagen. En morfolog\'ia matem\'atica, usar elementos estructurantes multiescala con tamaños incrementales es una buena manera de extraer caracter\'isticas multiescala [23,24,26-28]. Suponga B1,...,$B_n$ son elementos estructurantes multiescala con tamaños incrementales. $$ B_i = \underbrace{B_i \oplus B_1 ... \oplus B_1 }_\text{dilataci\'on i veces}, 1 \leq i \leq n $$. 
+La imagen contiene caracter\'isticas en diferentes escalas. Extraer caracter\'isticas multiescala ser\'ia efectivo para el procesamiento de imagen. En morfolog\'ia matem\'atica, usar elementos estructurantes multiescala con tamaños incrementales es una buena manera de extraer caracter\'isticas multiescala [23,24,26-28]. 
+
+Suponga \eqref{eq:h1} y \eqref{eq:h2}, elementos estructurantes multiescala con tamaños incrementales. 
+$$ 
+H_i = \underbrace{H_i \oplus H_1 ... \oplus H_1 }_\text{dilataci\'on i veces}, 1 \leq i \leq n 
+$$ 
+$$ 
+H_j = \underbrace{H_j \oplus H_1 ... \oplus H_1 }_\text{dilataci\'on j veces}, 1 \leq j \leq m 
+$$ 
 
 Basado en esos elementos estructurantes multiescala, el operador de cambio secuencial ser\'ia definido como sigue.
 $\\\\
-TO_i(I) = TO_i(TO_{i-1}(I)).
+OC_i(I) = OC_i(OC_{i-1}(I)).
 $
 $\\
-TO_0(I) = I.\\\\
+OC_0(I) = I.\\\\
 $
-Una ilustraci\'on del operador de cambio secuencial $TO_i$ usando los elementos estructurantes multiescala se muestra en la Fig. 1. En esta definici\'on. el operador de cambio secuencial usa elementos estructurantes para secuencialmente procesar caracter\'isticas de la imagen correspondiente a diferentes escalas. Por lo tanto, bas\'andose en el operador de cambio secuencial, la existencia de caracter\'isticas de imagen en diferentes escala podr\'ia ser identificado. Entonces, las caracter\'isticas de imagen de cada escala ser\'ia para el an\'alsis de la imagen. Esto ser\'ia \'util para el mejoramiento de imagen infrarroja.
+Una ilustraci\'on del operador de cambio secuencial $OC_i$ usando los elementos estructurantes multiescala se muestra en la Fig. \eqref{fig:Fig. 1}. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=6.5cm,height=2cm,angle=0]{rsc/TOGF.png}
+    \caption{Una ilustraci\'on del operador de cambio secuencial usando $OC_i$.}
+    \label{fig:Fig. 1}
+\end{figure}
+
+En esta definici\'on, el operador de cambio secuencial usa elementos estructurantes para secuencialmente procesar caracter\'isticas de la imagen correspondiente a diferentes escalas. Por lo tanto, bas\'andose en el operador de cambio secuencial, la existencia de caracter\'isticas de imagen en diferentes escala podr\'ia ser identificado. Entonces, las caracter\'isticas de imagen de cada escala ser\'ia para el an\'alsis de la imagen. Esto ser\'ia \'util para el mejoramiento de imagen infrarroja.
 Las regiones importantes en la imagen infrarroja son generalmente caracter\'isticas brillosas u oscuras que son diferentes de otras regiones. Por lo tanto, ser\'ia significativa para el mejoramiento de imagen infrarroja para extraer y utilizar las caracter\'isticas multiescala contenida de la imagen infrarroja original.
 
 \subsection{Extracci\'on de caracter\'isticas basada en operador de cambio secuencial}
 
-$TO_i(I)$ secuencialmente suaviza las caracter\'isticas de la imagen en las escalas de 1 a i. $TO_{i-1}(I)$ secuencialmente suaviza las caracter\'isticas de la imagen en las escalas de 1 a i - 1. Entonces, las caracter\'isticas de la imagen suavizado por el operador de cambio secuencial correspondiente a la escala i ser\'ia extra\'ido comparando $TO_i(I) $ con $TO_{i-1}(I)$.
-El resultado del operador de cambio secuencial suaviza caracter\'isticas de imagen brillosas y oscuras. $TO_{i-1}(I)$ suaviza las caracter\'isticas de imagen oscura y brillosas en las escalas de 1 a i - 1. $TO_i(I)$ suaviza las caracter\'isticas de imagen brillosas y oscuras en las escala de 1 a i. Los valores grises de las caracter\'isticas de imagen suavizadas ser\'a deprimido por el operador de cambio secuencial. Por lo tanto, comparando los valores grises de $TO_i(I)$ y $TO_{i-1}(I)$, las caracter\'isticas brillosas suavizadas en la escala i ser\'ia extra\'ido por el operador de cambio secuencial. Actualmente, la estrategia de comparaci\'on entre pixeles ha sido verificada como una manera efectiva de extracci\'on de caracter\'isticas de im\'agenes basada en operadores morfol\'ogicas [18,20-26]. Esta estrategia podr\'ia ser tambien usado en este paper por el operador de cambio secuencial para la extracci\'on de caracter\'isticas, que ser\'ia expresado como sigue.
+$OC_i(I)$ secuencialmente suaviza las caracter\'isticas de la imagen en las escalas de 1 a i. $OC_{i-1}(I)$ secuencialmente suaviza las caracter\'isticas de la imagen en las escalas de 1 a i - 1. Entonces, las caracter\'isticas de la imagen suavizado por el operador de cambio secuencial correspondiente a la escala i ser\'ia extra\'ido comparando $OC_i(I) $ con $OC_{i-1}(I)$.
+El resultado del operador de cambio secuencial suaviza caracter\'isticas de imagen brillosas y oscuras. $OC_{i-1}(I)$ suaviza las caracter\'isticas de imagen oscura y brillosas en las escalas de 1 a i - 1. $OC_i(I)$ suaviza las caracter\'isticas de imagen brillosas y oscuras en las escala de 1 a i. Los valores grises de las caracter\'isticas de imagen suavizadas ser\'a deprimido por el operador de cambio secuencial. Por lo tanto, comparando los valores grises de $OC_i(I)$ y $OC_{i-1}(I)$, las caracter\'isticas brillosas suavizadas en la escala i ser\'ia extra\'ido por el operador de cambio secuencial. Actualmente, la estrategia de comparaci\'on entre pixeles ha sido verificada como una manera efectiva de extracci\'on de caracter\'isticas de im\'agenes basada en operadores morfol\'ogicas [18,20-26]. Esta estrategia podr\'ia ser tambien usado en este paper por el operador de cambio secuencial para la extracci\'on de caracter\'isticas, que ser\'ia expresado como sigue.
 \begin{small}
 
 
 $$
-BSFTO_i(I)(x,y) = max(TO_{i-1}(x,y) - TO_i(I)(x,y),0).
+BCOCS_i(I)(x,y) = max(OC_{i-1}(x,y) - OC_i(I)(x,y),0).
 $$
 
 \end{small}
-$BFSTO_i(I)$ es las caracter\'isticas brillosas extra\'idas en la escala i usando el operador de cambio secuencial.
-Similarmente, $TO_{i-1}(I) $ suaviza las caracter\'isticas de imagen oscuras en las escala de 1 a i - 1. $TO_i(I)$ suaviza las caracter\'isticas de image oscuras en la escala de 1 a i. Los valores grises de las caracater\'isticas de imagen oscuras son pequeñas. Entonces, los valores grises en las caracter\'isticas de la imagen oscuras suavizadas ser\'a incrementada por TO. Por lo tanto, comparando los valores grises de $TO_i(I)$ y $TO_{i-1}(I)$, las caracter\'isticas oscuras suavizadas en la escala i ser\'ia extra\'ida por el operador de cambio secuencial como sigue.
+$BCOCS_i(I)$ es las caracter\'isticas brillosas extra\'idas en la escala i usando el operador de cambio secuencial.
+Similarmente, $OC_{i-1}(I) $ suaviza las caracter\'isticas de imagen oscuras en las escala de 1 a i - 1. $OC_i(I)$ suaviza las caracter\'isticas de image oscuras en la escala de 1 a i. Los valores grises de las caracater\'isticas de imagen oscuras son pequeñas. Entonces, los valores grises en las caracter\'isticas de la imagen oscuras suavizadas ser\'a incrementada por TO. Por lo tanto, comparando los valores grises de $OC_i(I)$ y $OC_{i-1}(I)$, las caracter\'isticas oscuras suavizadas en la escala i ser\'ia extra\'ida por el operador de cambio secuencial como sigue.
 
 \begin{small}
 $$
-DFSTO_i(I)(x,y) = max(TO_i(x,y) - TO_{i-1}(I)(x,y),0).
+OCOCS_i(I)(x,y) = max(OC_i(x,y) - OC_{i-1}(I)(x,y),0).
 $$
 
 \end{small}
@@ -194,58 +273,65 @@ Variando la escala i, las caracater\'isticas de imagen efectiva identificada por
 
 \subsection{Extracci\'on final para mejoramiento}
 
-Las caracter\'isticas de brillo final $BFSTO_i(I)$ solo contiene las caracter\'isticas de imagen correspondiente a la escala i. Agregar  caracter\'isticas de imagen multiescala ha sido una manera efectiva para extracci\'on de caracter\'isticas en diferentes aplicaciones [18,20,22-26]. As\'i, las caracter\'isticas de brillo extra\'ido de diferentes escalas (denotado por FBFSTOA) por el operador de cambio secuencial en este paper podr\'ia ser tambi\'en efectivamente combinado a trav\'es de la suma entre p\'ixeles de $BFSTO_i(I)$ de todas las escalas como sigue.
+Las caracter\'isticas de brillo final $BCOCS_i(I)$ solo contiene las caracter\'isticas de imagen correspondiente a la escala i. Agregar  caracter\'isticas de imagen multiescala ha sido una manera efectiva para extracci\'on de caracter\'isticas en diferentes aplicaciones [18,20,22-26]. As\'i, las caracter\'isticas de brillo extra\'ido de diferentes escalas (denotado por FBCOCSA) por el operador de cambio secuencial en este paper podr\'ia ser tambi\'en efectivamente combinado a trav\'es de la suma entre p\'ixeles de $BCOCS_i(I)$ de todas las escalas como sigue.
 
 $$
-FBFSTOA(x,y) = \sum_{i} [BFSTO_i(x,y)].
+FBCOCSA(x,y) = \sum_{i} [BCOCS_i(x,y)].
 $$
 
-Adem\'as, las caracter\'isticas de brillo extra\'ida de imagen infrarroja usualmente tienen valores de grises grandes en $BFSTO_i(I)$. Entonces, las caracter\'isticas de brillo importante, que usualmente representa los detalles de la imagen, tendr\'ia los valores de grises m\'as grandes en todas las escalas. Adem\'as, la operaci\'on de m\'aximo entre pixeles, que ha sido efectivamente usado por otros operadores morfol\'ogicas para la extracci\'on de caracter\'isticas de imagen importantes [18-26], ser\'ia tambien usado en este paper por el operador de cambio secuencial para la extracci\'on de brillo caracter\'isticos importantes. Por lo tanto, las caracter\'isticas de brillos importantes (denotado por FBFSTOM) ser\'ia obtenido aplicando la operaci\'on de m\'aximo entre pixeles en $BFSTO_i(I)$ de todas las escalas como sigue.
+Adem\'as, las caracter\'isticas de brillo extra\'ida de imagen infrarroja usualmente tienen valores de grises grandes en $BCOCS_i(I)$. Entonces, las caracter\'isticas de brillo importante, que usualmente representa los detalles de la imagen, tendr\'ia los valores de grises m\'as grandes en todas las escalas. Adem\'as, la operaci\'on de m\'aximo entre pixeles, que ha sido efectivamente usado por otros operadores morfol\'ogicas para la extracci\'on de caracter\'isticas de imagen importantes [18-26], ser\'ia tambien usado en este paper por el operador de cambio secuencial para la extracci\'on de brillo caracter\'isticos importantes. Por lo tanto, las caracter\'isticas de brillos importantes (denotado por FBCOCSM) ser\'ia obtenido aplicando la operaci\'on de m\'aximo entre pixeles en $BCOCS_i(I)$ de todas las escalas como sigue.
 
 $$
-FBFSTOM(x,y) = max_i[BFSTO_i(x,y)].
+FBCOCSM(x,y) = max_i[BCOCS_i(x,y)].
 $$
 
-Para mejorar las caracter\'isticas de brillo de la imagen, especialmente los detalles de brillo de la imagen, las caracter\'isticas de brillo importante extra\'ida FBFSTOM podr\'ia ser agregado en FBFSTOA. Por lo tanto, las caracter\'isticas de brillo final extra\'ido de im\'agenes infrarrojas ser\'ia la combinaci\'on de las caracter\'isticas de brillo extra\'idas de todas las escalas como sigue.
+Para mejorar las caracter\'isticas de brillo de la imagen, especialmente los detalles de brillo de la imagen, las caracter\'isticas de brillo importante extra\'ida FBCOCSM podr\'ia ser agregado en FBCOCSA. Por lo tanto, las caracter\'isticas de brillo final extra\'ido de im\'agenes infrarrojas ser\'ia la combinaci\'on de las caracter\'isticas de brillo extra\'idas de todas las escalas como sigue.
 
-$$FBFSTO = FBFSTOA + FBFSTOM$$.
+$$FBCOCS = FBCOCSA + FBCOCSM$$.
 
-FBFSTO representa las caracter\'isticas final de brillo extra\'ida de imagen infrarroja a trav\'es del operador de cambio secuencial, que podr\'ia ser usado para el mejoramiento de las caracter\'isticas de brillo de imagen, especialmente el mejoramiento de los detalles brillosas de la imagen.
+FBCOCS representa las caracter\'isticas final de brillo extra\'ida de imagen infrarroja a trav\'es del operador de cambio secuencial, que podr\'ia ser usado para el mejoramiento de las caracter\'isticas de brillo de imagen, especialmente el mejoramiento de los detalles brillosas de la imagen.
 
-De manera similar, debido a que las caracter\'isticas oscuras extra\'idas  $DFSTO_i(I)$ solo contiene las caracter\'isticas de imagen correspondiente a la escala i, las caracter\'isticas oscuras extra\'idas de diferentes escalas (denotado por FDFSTOA) podr\'ia ser combinado a trav\'es de la sumatoria entre pixeles de $DFSTOA_i(I)$ de todas las escalas como sigue.
-
-$$
-FDFSTOA(x,y) = \sum_{i} [DFSTO_i(x,y)].
-$$
-
-Adem\'as, las caracter\'isticas oscuras extra\'idas de imagen infrarroja tienen grandes valores de grises en $DFSTO_i(I)$. Entonces, las caracter\'isticas de imagen oscuras importantes, que usualmente representa los detalles de la imagen oscura, tendr\'ia los valores de grises mas grandes en todas las escalas. Por lo tanto, las caracter\'isticas oscuras importantes (denotado por FDFSTOM) podr\'ia ser obtenido por la operaci\'on de m\'aximo en $DFSTO_i(I)$ de todas las escalas como sigue.
+De manera similar, debido a que las caracter\'isticas oscuras extra\'idas  $OCOCS_i(I)$ solo contiene las caracter\'isticas de imagen correspondiente a la escala i, las caracter\'isticas oscuras extra\'idas de diferentes escalas (denotado por FOCOCSA) podr\'ia ser combinado a trav\'es de la sumatoria entre pixeles de $OCOCSA_i(I)$ de todas las escalas como sigue.
 
 $$
-FDFSTOM(x,y) = max_i[DFSTO_i(x,y)].
+FOCOCSA(x,y) = \sum_{i} [OCOCS_i(x,y)].
 $$
 
-Para mejorar las caracter\'isticas de oscuras de la imagen, especialmente los detalles oscuros de la imagen, las caracter\'isticas oscuras importante extra\'ida FDFSTOM podr\'ia ser agregado en FDFSTOA. Por lo tanto, las caracter\'isticas oscuras final extra\'ido de im\'agenes infrarrojas ser\'ia la combinaci\'on de las caracter\'isticas oscuras extra\'idas de todas las escalas como sigue.
+Adem\'as, las caracter\'isticas oscuras extra\'idas de imagen infrarroja tienen grandes valores de grises en $OCOCS_i(I)$. Entonces, las caracter\'isticas de imagen oscuras importantes, que usualmente representa los detalles de la imagen oscura, tendr\'ia los valores de grises mas grandes en todas las escalas. Por lo tanto, las caracter\'isticas oscuras importantes (denotado por FOCOCSM) podr\'ia ser obtenido por la operaci\'on de m\'aximo en $OCOCS_i(I)$ de todas las escalas como sigue.
 
-$$FDFSTO = FDFSTOA + FDFSTOM$$.
+$$
+FOCOCSM(x,y) = max_i[OCOCS_i(x,y)].
+$$
+
+Para mejorar las caracter\'isticas de oscuras de la imagen, especialmente los detalles oscuros de la imagen, las caracter\'isticas oscuras importante extra\'ida FOCOCSM podr\'ia ser agregado en FOCOCSA. Por lo tanto, las caracter\'isticas oscuras final extra\'ido de im\'agenes infrarrojas ser\'ia la combinaci\'on de las caracter\'isticas oscuras extra\'idas de todas las escalas como sigue.
+
+$$FOCOCS = FOCOCSA + FOCOCSM$$.
 
 FDFSTO representa las caracter\'isticas final oscuras extra\'ida de imagen infrarroja a trav\'es del operador de cambio secuencial, que podr\'ia ser usado para el mejoramiento de las caracter\'isticas oscuras de imagen, especialmente el mejoramiento de los detalles oscuras de la imagen.
 
-Un ejemplo de la extracci\'on de caracter\'isticas es mostrado en Fig.2.(a) es la imagen original infrarroja. (b) y (c) son las caracter\'isticas de brillo y oscuridad final extra\'idas de la imagen infrarroja, respectivamente. Los valores de grises de la Fig.2(b) y (c) son ajustado dentro del intervalo de grises [1,70] para claramente mostrar las caracter\'isticas de brillo y oscuridad. Fig. 2(b) y (c) muestra que, esas caracter\'isticas final extra\'idas representa la regiones importantes de brillo y oscuridad y detalles de la imagen original infrarroja.
-Especialmente, Fig. 2(b) contiene las caracter\'isticas importantes de la regi\'on objetiva. Por lo tanto, esas caracter\'isticas podr\'ia ser usado para mejorar la imagen infrarroja original efectivamente.
+%%Un ejemplo de la extracci\'on de caracter\'isticas es mostrado en Fig.2.(a) es la imagen original infrarroja. (b) y (c) son las caracter\'isticas de brillo y oscuridad final extra\'idas de la imagen infrarroja, respectivamente. Los valores de grises de la Fig.2(b) y (c) son ajustado dentro del intervalo de grises [1,70] para claramente mostrar las caracter\'isticas de brillo y oscuridad. Fig. 2(b) y (c) muestra que, esas caracter\'isticas final extra\'idas representa la regiones importantes de brillo y oscuridad y detalles de la imagen original infrarroja.
+%%Especialmente, Fig. 2(b) contiene las caracter\'isticas importantes de la regi\'on objetiva. Por lo tanto, esas caracter\'isticas podr\'ia ser usado para mejorar la imagen infrarroja original efectivamente.
 
 \subsection{Mejoramiento de la imagen infrarroja}
 
-Una manera efectiva de mejoramiento de la imagen infrarroja es mejorar los detalles de la imagen a trav\'es de la ampliaci\'on de contraste de la imagen infrarroja original [23]. FBFSTO es la caracter\'istica de brillo final extra\'ida de la imagen infrarroja por el operador de cambio secuencial, y FDFSTO es la caracter\'istica oscuras final extra\'ida. Entonces, siguiendo la ampliaci\'on de contraste [23], el contraste de la imagen infrarroja original podr\'ia ser ampliada como sigue. 
+Una manera efectiva de mejoramiento de la imagen infrarroja es mejorar los detalles de la imagen a trav\'es de la ampliaci\'on de contraste de la imagen infrarroja original [23]. FBCOCS es la caracter\'istica de brillo final extra\'ida de la imagen infrarroja por el operador de cambio secuencial, y FOCOCS es la caracter\'istica oscuras final extra\'ida. Entonces, siguiendo la ampliaci\'on de contraste [23], el contraste de la imagen infrarroja original podr\'ia ser ampliada como sigue. 
 
 $$
-I_{EN} = w_1  *  I + w_2 * FBFSTO - w_3 *FDFSTO
+I_{ME} = p_1  *  I + p_2 * FBCOCS - p_3 * FOCOCS
 $$
 
-$f_{EN}$ representa la imagen infrarroja final mejorada, $w_1$, $w_2$ y $w_3$ son los pesos para ajustar el contraste del resultado de la imagen.
+$I_{ME}$ representa la imagen infrarroja final mejorada, $p_1$, $p_2$ y $p_3$ son los pesos para ajustar el contraste del resultado de la imagen.
 
-FBFSTO y FDFSTO son las caracter\'isticas final de brillo y oscuridad respectivamente. Importando esas caracter\'isticas de imagen que contiene los detalles de la imagen en la imagen infrarroja original podr\'ia mejorar los detalles de la imagen en la imagen infrarroja. Tambien, el contraste de las caracter\'isticas de brillo y oscuridad son ampliadas a trav\'es del mejoramiento de contraste. Adem\'as, e contraste del resultado de la imagen final  podr\'ia ser ajustado a trav\'es de los pesos para obtener un resultado de mejoramiento efectivo. Por lo tanto, el contraste y los detalles de imagen de la imagen infrarroja original son mejoradas, lo que resulta en un resultado efectivo del mejoramiento de la imagen infrarroja.
+FBCOCS y FOCOCS son las caracter\'isticas final de brillo y oscuridad respectivamente. Importando esas caracter\'isticas de imagen que contiene los detalles de la imagen en la imagen infrarroja original podr\'ia mejorar los detalles de la imagen en la imagen infrarroja. Tambien, el contraste de las caracter\'isticas de brillo y oscuridad son ampliadas a trav\'es del mejoramiento de contraste. Adem\'as, el contraste del resultado de la imagen final  podr\'ia ser ajustado a trav\'es de los pesos para obtener un resultado de mejoramiento efectivo. Por lo tanto, el contraste y los detalles de imagen de la imagen infrarroja original son mejoradas, lo que resulta en un resultado efectivo del mejoramiento de la imagen infrarroja.
 
-El procedimiento del algoritmo propuesto se muestra en la Fig. 3. Primeramente, las caracter\'isticas de brillo y oscuridad multiescala de la imagen infrarroja son extra\'idas. Segundo, las caracter\'isticas final de brillo y oscuridad son calculadas desde las caracter\'isticas de brillo y oscuridad multiescala extra\'idas. Finalmente, la imagen infrarroja es mejorada usando el modo de ampliaci\'on de contraste. Fig. 4 muestra el resultado final del mejoramiento de la imagen infrarroja original en la Fig. 1(a). Fig. 4 indica que, la imagen y los detalles son mejorados efectivamente. Y, el objetivo es m\'as claro que la imagen infrarroja original. Este resultado mejorado beneficiar\'ia el an\'alisis posterior de la imagen infrarroja.
+\begin{figure}
+    %\centering
+    \includegraphics[width=8.8cm,height=3.5cm,angle=0]{rsc/AP.png}
+    \caption{El procedimiento del algoritmo propuesto}
+    \label{fig:Fig. 2}
+\end{figure}
+
+El procedimiento del algoritmo propuesto se muestra en la Fig. 2. Primeramente, las caracter\'isticas de brillo y oscuridad multiescala de la imagen infrarroja son extra\'idas. Segundo, las caracter\'isticas final de brillo y oscuridad son calculadas desde las caracter\'isticas de brillo y oscuridad multiescala extra\'idas. Finalmente, la imagen infrarroja es mejorada usando el modo de ampliaci\'on de contraste. Fig. 4 muestra el resultado final del mejoramiento de la imagen infrarroja original en la Fig. 1(a). Fig. 4 indica que, la imagen y los detalles son mejorados efectivamente. Y, el objetivo es m\'as claro que la imagen infrarroja original. Este resultado mejorado beneficiar\'ia el an\'alisis posterior de la imagen infrarroja.
 
 \subsection{Selecci\'on de par\'ametros}
 
@@ -254,11 +340,11 @@ El elemento estructurante ampliamente utilizado es un elemento estructurante pla
 
 El n\'umero de escala n determina las caracter\'isticas de las im\'agenes extra\'idas. Usando n\'umero de escala grande podr\'ia extraer m\'as caracter\'isticas de imagen. Generalmente, no hay necesidad de extraer caracter\'isticas de imagen en escala muy alta debido a que los detalles de la imagen infrarroja en escalas altas no son muy ricos [23]. Entonces, no hay necesidad de usar numeros de escalas grandes. Los resultados experimentales en im\'agenes infrarrojas muestran que, usando n\'umero de escala entre [3,7] es efectivo para la mayor\'ia de las im\'agenes. En este paper, usamos n\'umero de escala n = 5. Y, los resultados experimentales verific\'o que usando n = 5 fue efectivo para el mantenimiento del mejoramiento de los detalles de la imagen infrarroja.
 
-Los valores de los pesos $w_1$, $w_2$, $w_3$ son usados para el ajustar el contraste del mejoramiento final de la imagen infrarroja y as\' mejorar aun m\'as los detalles de la imagen. Generalmente, hay valores positivos entre [0,3]. Para mejorar bien las caracter\'isticas de la imagen extra\'ida y obtener un buen contraste, $w_1$ ser\'ia pequeño, y $w_2$ y $w_3$ ser\'ia grande. En este paper, definimos $w_1$ = 0.6, $w_2$ = 1.5 y $w_3$ = 1.5. Los resultados experimentales verific\'o que, esos pesos fueron efectivos.
+Los valores de los pesos $p_1$, $p_2$, $p_3$ son usados para el ajustar el contraste del mejoramiento final de la imagen infrarroja y as\' mejorar aun m\'as los detalles de la imagen. Generalmente, hay valores positivos entre [0,3]. Para mejorar bien las caracter\'isticas de la imagen extra\'ida y obtener un buen contraste, $p_1$ ser\'ia pequeño, y $p_2$ y $p_3$ ser\'ia grande. En este paper, definimos $p_1$ = 0.6, $p_2$ = 1.5 y $p_3$ = 1.5. Los resultados experimentales verific\'o que, esos pesos fueron efectivos.
 
 \section{Resultados experimentales}
 
-Para verificar el rendimiento efectivo del algoritmo propuesto, im\'agenes infrarrojas con diferentes tipos de desorden de fondos y obtenidos bajo diferentes circunstancias son usados en este experimento. Para ser una comparaci\'on justa, el conjunto de datos usados de las im\'agenes infrarrojas originales es el mismo que [23]. Adem\'as, algunos algoritmos podr\'ian ser usados para mejoramiento de im\'agenes infrarrojas, incluyendo el algoritmo de ecualizaci\'on de histograma (HE)[15,16], algoritmo de equalizaci\'on  de histograma de contraste adaptativo limitado (CLAHE) [16], algoritmo basado en morfolog\'ia multiescala (MSM) [28] y algoritmo basado en la nueva transformada top-hat multiescala (MSNTH) [23], son usados en este paper como algoritmos de comparaci\'on. HE y CLAHE son algoritmos ampliamente usados para mejoramiento de imagen, que podr\'ian ser usado para el mejoramiento de la imagen infrarroja. MSM es el algoritmo efectivo para el mejoramiento de imagen basada en morfolog\'ia matem\'atica multiescala. MSNTH es un algoritmo efectivo para el mejoramiento de imagen infrarroja, que es tambi\'en est\'a basado en la teor\'ia de la matem\'atica morofol\'ogica multiescala y podr\'ia ser usado para el mejoramiento bien de la imagen infrarroja. Por lo tanto, HE, CLAHE, MSM, MSNTH son adoptados en este paper para hacer la comparaci\'on. Los experimentos de comparaci\'on cuantitativa y visual son mostrados abajo.
+Para verificar el rendimiento efectivo del algoritmo propuesto, im\'agenes infrarrojas con diferentes tipos de desorden de fondos y obtenidos bajo diferentes circunstancias son usados en este experimento. Para ser una comparaci\'on justa, el conjunto de datos usados de las im\'agenes infrarrojas originales es el mismo que [23]. Adem\'as, algunos algoritmos podr\'ian ser usados para mejoramiento de im\'agenes infrarrojas, incluyendo el algoritmo de ecualizaci\'on de histograma (HE)[15,16], algoritmo de equalizaci\'on  de histograma de contraste adaptativo limitado (CLAHE) [16],  y algoritmo basado en operador de cambio secuencial multiescala (MSSTO) [23], son usados en este paper como algoritmos de comparaci\'on. HE y CLAHE son algoritmos ampliamente usados para mejoramiento de imagen, que podr\'ian ser usado para el mejoramiento de la imagen infrarroja. . MSSTO es un algoritmo efectivo para el mejoramiento de imagen infrarroja, que tambi\'en est\'a basado en la teor\'ia de la matem\'atica morofol\'ogica multiescala con operador de cambio secuencial y podr\'ia ser usado para el mejoramiento bien de la imagen infrarroja. Por lo tanto, HE, CLAHE, MSSTO son adoptados en este paper para hacer la comparaci\'on. Los experimentos de comparaci\'on cuantitativa y visual son mostrados abajo.
 
 \subsection{Comparaci\'on visual}
 
