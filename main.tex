@@ -30,7 +30,13 @@
 \usepackage{graphicx}
 \usepackage{pifont}% http://ctan.org/pkg/pifont
 
-\newcommand{\xmult}{\ding{53}}%
+\usepackage{float}
+\usepackage[caption = false]{subfig}
+\usepackage[final]{graphicx}
+%\usepackage[export]{adjustbox}
+%\usepackage{subcaption}
+
+%\newcommand{\xmult}{\ding{53}}%
 
 \title{\LARGE \bf
 Mejora de im\'agenes t\'ermicas a\'ereas basado en morfolog\'ia matem\'atica multiescala con operadores de cambios secuenciales
@@ -345,6 +351,93 @@ Los valores de los pesos $p_1$, $p_2$, $p_3$ son usados para el ajustar el contr
 \section{Resultados experimentales}
 
 Para verificar el rendimiento efectivo del algoritmo propuesto, im\'agenes infrarrojas con diferentes tipos de desorden de fondos y obtenidos bajo diferentes circunstancias son usados en este experimento. Para ser una comparaci\'on justa, el conjunto de datos usados de las im\'agenes infrarrojas originales es el mismo que [23]. Adem\'as, algunos algoritmos podr\'ian ser usados para mejoramiento de im\'agenes infrarrojas, incluyendo el algoritmo de ecualizaci\'on de histograma (HE)[15,16], algoritmo de equalizaci\'on  de histograma de contraste adaptativo limitado (CLAHE) [16],  y algoritmo basado en operador de cambio secuencial multiescala (MSSTO) [23], son usados en este paper como algoritmos de comparaci\'on. HE y CLAHE son algoritmos ampliamente usados para mejoramiento de imagen, que podr\'ian ser usado para el mejoramiento de la imagen infrarroja. . MSSTO es un algoritmo efectivo para el mejoramiento de imagen infrarroja, que tambi\'en est\'a basado en la teor\'ia de la matem\'atica morofol\'ogica multiescala con operador de cambio secuencial y podr\'ia ser usado para el mejoramiento bien de la imagen infrarroja. Por lo tanto, HE, CLAHE, MSSTO son adoptados en este paper para hacer la comparaci\'on. Los experimentos de comparaci\'on cuantitativa y visual son mostrados abajo.
+
+\begin{figure}
+    \centering
+    \subfloat[]{
+        \includegraphics[width = 0.25\textwidth]{rsc/res1/520.png}
+    } \\
+    \subfloat[]{
+        \includegraphics[width = 0.25\textwidth]{rsc/res1/520HE.png}
+    }
+    \subfloat[]{
+        \includegraphics[width = 0.25\textwidth]{rsc/res1/520CLAHE.png}
+    }\\
+    \subfloat[]{
+        \includegraphics[width = 0.25\textwidth]{rsc/res1/520PAPER.png}
+    }
+    \subfloat[]{
+        \includegraphics[width = 0.25\textwidth]{rsc/res1/520PROP.png}
+    } 
+    \caption{Un ejemplo de comparaci\'on de im\'agenes infrarrojas (a) la imagen original (b) es el resultado mejorad de HE (c) es el resultado mejorado de CLAHE (c) es el resultado mejorado de MSSTO (d) es el resultado mejorado del algoritmo propuesto.}
+    \label{fig:fig3}
+
+\end{figure}
+
+%\begin{figure}[h]
+%\centering
+%\begin{minipage}{0.4\textwidth}%
+%\subfloat[Subfigure 1 list of figures text][Subfigure 1 caption]{
+%\includegraphics[width=0.4\textwidth]{rsc/res3/44.png}
+%\label{fig:subfig1}}
+%\end{minipage}%
+%\begin{minipage}{0.4\textwidth}%
+%\subfloat[Subfigure 1 list of figures text][Subfigure 1 caption]{
+%\includegraphics[width=0.4\textwidth]{rsc/res3/44HE.png}
+%\label{fig:subfig1}}
+%\end{minipage}%
+%\qquad
+%\begin{minipage}{0.4\textwidth}%
+%\subfloat[Subfigure 2 list of figures text][Subfigure 2 caption]{
+%\includegraphics[width=0.4\textwidth]{rsc/res3/44CLAHE.png}
+%\label{fig:subfig2}} \\
+%\subfloat[Subfigure 3 list of figures text][Subfigure 3 caption]{
+%\includegraphics[width=0.4\textwidth]{rsc/res3/44PAPER.png}
+%\label{fig:subfig3}}
+%\end{minipage}
+%\begin{minipage}{0.4\textwidth}%
+%\subfloat[Subfigure 1 list of figures text][Subfigure 1 caption]{
+%\includegraphics[width=0.4\textwidth]{rsc/res3/44PROP.png}
+%\label{fig:subfig1}}
+%\end{minipage}%
+
+%\caption{This is a figure containing several subfigures.}
+%\label{fig:globfig}
+%\end{figure}
+
+
+\begin{figure}[]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=0.20\textwidth, height=2.5cm]{rsc/res1/520.png} 
+        \caption{(a)}
+        %\label{fig:subim1}
+    \end{subfigure}\\
+    \begin{subfigure}{\textwidth}
+        \includegraphics[width=0.20\textwidth, height=2.5cm]{rsc/res1/520HE.png}
+        %\caption{Caption 2}
+        %\label{fig:subim2}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \includegraphics[width=0.20\textwidth, height=2.5cm]{rsc/res1/520CLAHE.png} 
+        %\caption{Caption1}
+        %\label{fig:subim1}
+    \end{subfigure}\\
+    \begin{subfigure}{\textwidth}
+        \includegraphics[width=0.20\textwidth, height=2.5cm]{rsc/res1/520PAPER.png} 
+        %\caption{Caption1}
+        %\label{fig:subim1}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \includegraphics[width=0.20\textwidth, height=2.5cm]{rsc/res1/520PROP.png}
+        %\caption{Caption 2}
+        %\label{fig:subim2}
+    \end{subfigure}
+ 
+    \caption{Caption for this figure with two images}
+    \label{fig:image2}
+\end{figure}
 
 \subsection{Comparaci\'on visual}
 
