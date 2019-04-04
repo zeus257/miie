@@ -32,7 +32,7 @@
 
 \usepackage{float}
 \usepackage[caption = false]{subfig}
-\usepackage[final]{graphicx}
+%\usepackage[final]{graphicx}
 %\usepackage[export]{adjustbox}
 %\usepackage{subcaption}
 
@@ -71,12 +71,9 @@ Mejora de im\'agenes t\'ermicas a\'ereas basado en morfolog\'ia matem\'atica mul
 
 \begin{document}
 
-
-
 \maketitle
 \thispagestyle{empty}
 \pagestyle{empty}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
@@ -350,7 +347,7 @@ Los valores de los pesos $p_1$, $p_2$, $p_3$ son usados para el ajustar el contr
 
 \section{Resultados experimentales}
 
-Para verificar el rendimiento efectivo del algoritmo propuesto, im\'agenes infrarrojas con diferentes tipos de desorden de fondos y obtenidos bajo diferentes circunstancias son usados en este experimento. Para ser una comparaci\'on justa, el conjunto de datos usados de las im\'agenes infrarrojas originales es el mismo que [23]. Adem\'as, algunos algoritmos podr\'ian ser usados para mejoramiento de im\'agenes infrarrojas, incluyendo el algoritmo de ecualizaci\'on de histograma (HE)[15,16], algoritmo de equalizaci\'on  de histograma de contraste adaptativo limitado (CLAHE) [16],  y algoritmo basado en operador de cambio secuencial multiescala (MSSTO) [23], son usados en este paper como algoritmos de comparaci\'on. HE y CLAHE son algoritmos ampliamente usados para mejoramiento de imagen, que podr\'ian ser usado para el mejoramiento de la imagen infrarroja. . MSSTO es un algoritmo efectivo para el mejoramiento de imagen infrarroja, que tambi\'en est\'a basado en la teor\'ia de la matem\'atica morofol\'ogica multiescala con operador de cambio secuencial y podr\'ia ser usado para el mejoramiento bien de la imagen infrarroja. Por lo tanto, HE, CLAHE, MSSTO son adoptados en este paper para hacer la comparaci\'on. Los experimentos de comparaci\'on cuantitativa y visual son mostrados abajo.
+Para verificar el rendimiento efectivo del algoritmo propuesto, im\'agenes infrarrojas con diferentes tipos de desorden de fondos y obtenidos bajo diferentes circunstancias son usados en este experimento. Para ser una comparaci\'on justa, el conjunto de datos usados de las im\'agenes infrarrojas originales es el mismo que [23]. Adem\'as, algunos algoritmos podr\'ian ser usados para mejoramiento de im\'agenes infrarrojas, incluyendo el algoritmo de ecualizaci\'on de histograma (HE)[15,16], algoritmo de equalizaci\'on  de histograma de contraste adaptativo limitado (CLAHE) [16],  y algoritmo basado en operador de cambio secuencial multiescala (MSSTO) [23], son usados en este paper como algoritmos de comparaci\'on. HE y CLAHE son algoritmos ampliamente usados para mejoramiento de imagen, que podr\'ian ser usado para el mejoramiento de la imagen infrarroja. MSSTO es un algoritmo efectivo para el mejoramiento de imagen infrarroja, que tambi\'en est\'a basado en la teor\'ia de la matem\'atica morofol\'ogica multiescala con operador de cambio secuencial y podr\'ia ser usado para el mejoramiento bien de la imagen infrarroja. Por lo tanto, HE, CLAHE, MSSTO son adoptados en este paper para hacer la comparaci\'on. Los experimentos de comparaci\'on cuantitativa y visual son mostrados abajo.
 
 \begin{figure}
     \centering
@@ -369,7 +366,7 @@ Para verificar el rendimiento efectivo del algoritmo propuesto, im\'agenes infra
     \subfloat[]{
         \includegraphics[width = 0.25\textwidth]{rsc/res1/520PROP.png}
     } 
-    \caption{Un ejemplo de comparaci\'on de im\'agenes infrarrojas (a) la imagen original (b) es el resultado mejorad de HE (c) es el resultado mejorado de CLAHE (c) es el resultado mejorado de MSSTO (d) es el resultado mejorado del algoritmo propuesto.}
+    \caption{Un ejemplo de comparaci\'on de im\'agenes infrarrojas (a) la imagen original (b) es el resultado mejorado de HE (c) es el resultado mejorado de CLAHE (d) es el resultado mejorado de MSSTO (e) es el resultado mejorado del algoritmo propuesto.}
     \label{fig:fig3}
 
 \end{figure}
@@ -406,42 +403,53 @@ Para verificar el rendimiento efectivo del algoritmo propuesto, im\'agenes infra
 %\end{figure}
 
 
-\begin{figure}[]
+\begin{figure}
     \centering
-    \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=0.20\textwidth, height=2.5cm]{rsc/res1/520.png} 
-        \caption{(a)}
-        %\label{fig:subim1}
-    \end{subfigure}\\
-    \begin{subfigure}{\textwidth}
-        \includegraphics[width=0.20\textwidth, height=2.5cm]{rsc/res1/520HE.png}
-        %\caption{Caption 2}
-        %\label{fig:subim2}
-    \end{subfigure}
-    \begin{subfigure}{\textwidth}
-        \includegraphics[width=0.20\textwidth, height=2.5cm]{rsc/res1/520CLAHE.png} 
-        %\caption{Caption1}
-        %\label{fig:subim1}
-    \end{subfigure}\\
-    \begin{subfigure}{\textwidth}
-        \includegraphics[width=0.20\textwidth, height=2.5cm]{rsc/res1/520PAPER.png} 
-        %\caption{Caption1}
-        %\label{fig:subim1}
-    \end{subfigure}
-    \begin{subfigure}{\textwidth}
-        \includegraphics[width=0.20\textwidth, height=2.5cm]{rsc/res1/520PROP.png}
-        %\caption{Caption 2}
-        %\label{fig:subim2}
-    \end{subfigure}
- 
-    \caption{Caption for this figure with two images}
-    \label{fig:image2}
+    \subfloat[]{
+        \includegraphics[width = 0.23\textwidth]{rsc/res2/306.png}
+    } \\
+    \subfloat[]{
+        \includegraphics[width = 0.23\textwidth]{rsc/res2/306HE.png}
+    }
+    \subfloat[]{
+        \includegraphics[width = 0.23\textwidth]{rsc/res2/306CLAHE.png}
+    }\\
+    \subfloat[]{
+        \includegraphics[width = 0.23\textwidth]{rsc/res2/306PAPER.png}
+    }
+    \subfloat[]{
+        \includegraphics[width = 0.23\textwidth]{rsc/res2/306PROP.png}
+    } 
+    \caption{Un ejemplo de comparaci\'on de im\'agenes infrarrojas (a) la imagen original (b) es el resultado mejorad de HE (c) es el resultado mejorado de CLAHE (d) es el resultado mejorado de MSSTO (e) es el resultado mejorado del algoritmo propuesto.}
+    \label{fig:fig4}
+
+\end{figure}
+
+\begin{figure}
+    \centering
+    \subfloat[]{
+        \includegraphics[width = 0.23\textwidth]{rsc/res4/90.png}
+    } \\
+    \subfloat[]{
+        \includegraphics[width = 0.23\textwidth]{rsc/res4/90HE.png}
+    }
+    \subfloat[]{
+        \includegraphics[width = 0.23\textwidth]{rsc/res4/90CLAHE.png}
+    }\\
+    \subfloat[]{
+        \includegraphics[width = 0.23\textwidth]{rsc/res4/90PAPER.png}
+    }
+    \subfloat[]{
+        \includegraphics[width = 0.23\textwidth]{rsc/res4/90PROP.png}
+    } 
+    \caption{Un ejemplo de comparaci\'on de im\'agenes infrarrojas (a) la imagen original (b) es el resultado mejorad de HE (c) es el resultado mejorado de CLAHE (c) es el resultado mejorado de MSSTO (d) es el resultado mejorado del algoritmo propuesto.}
+    \label{fig:fig5}
+
 \end{figure}
 
 \subsection{Comparaci\'on visual}
 
-Fig. 5 es un ejemplo de comparaci\'on en la imagen infrarroja con objetivos a\'ereos y fondos de cielos desordenados. (a) es la imagen infrarroja original. (b) es el resultado mejorado de HE. (c) es el resultado mejorado de CLAHE. (d) es el resultado mejorado de MSM. (e) es el resultado mejorado de MSNTH. (f) es el resultado mejorado del algoritmo propuesto. La imagen original no tiene un buen contraste y la imagen no est\'a clara. Los resultados mejorados de HE y CLAHE mejora las regiones de brillo de la imagen original. Pero, las regiones a\'ereas no es clara en comparaci\'on con la imagen original. Adem\'as, los ruidos son pesados en esos resultados. MSM mejora la imagen infrarroja, pero los ruidos de la imagen mejorada son tambien pesados. El resultado de MSNTH tiene buen  contraste y el objetivo es brilloso. Pero, las alas de las naves no est\'an bien mejorados. El algoritmo propuesto mejora la imagen original. En la imagen mejorada, el contraste es bueno y los ruidos contenidos son pocos. Adem\'as, la regi\'on completa de la nave objetivo es mejorada, incluyendo las alas. Por lo tanto, el algoritmo propuesto realiza mejor que otros algoritmos.
+Fig. \eqref{fig:fig3} es un ejemplo de comparaci\'on en la imagen infrarroja con objetivos a\'ereos y fondos desordenados. (a) es la imagen infrarroja original \textit{590.png}. (b) es el resultado mejorado de HE. (c) es el resultado mejorado de CLAHE. (d) es el resultado mejorado de MSSTO. (e) es el resultado mejorado del algoritmo propuesto. La imagen original no tiene un buen contraste y la imagen no est\'a clara. Los resultados mejorados de HE y CLAHE mejora las regiones de brillo de la imagen original. Pero, las regiones a\'ereas no es clara en comparaci\'on con la imagen original. Adem\'as, los ruidos son pesados en esos resultados. MSSTO mejora la imagen infrarroja, pero los ruidos de la imagen mejorada son tambien pesados. El resultado de MSNTH tiene buen  contraste y el objetivo es brilloso. Pero, las alas de las naves no est\'an bien mejorados. El algoritmo propuesto mejora la imagen original. En la imagen mejorada, el contraste es bueno y los ruidos contenidos son pocos. Adem\'as, la regi\'on completa de la nave objetivo es mejorada, incluyendo las alas. Por lo tanto, el algoritmo propuesto realiza mejor que otros algoritmos.
 
 Fig. 6 es un ejemplo de comparaci\'on en imagen infrarroja con objetivo en la nave y fondos de cielo y mar desordenados. (a) es la imagen infrarroja original. (b) es el resultado mejorado de HE. (c) es el resultado mejorado de CLAHE. (d) es el resultado mejorado de MSM. (e) es el resultado mejorado de MSNTH. (f) es el resultado mejorado del algoritmo propuesto. Debido a la niebla atmosf\'erica, la imagen infrarroja original no es clara y los objetivos no son claros. Por lo tanto, la distribuci\'on de grises de la imagen infrarroja original est\'a limitada. HE sobremejora las regiones objetivas y algun desorden del fondo del oc\'eano. Y, un objetivo muy oscuro podr\'ia no ser observado en el resultado mejorado.  CLAHE mejora la imagen completa, pero las regiones objetivas aun no son claras. MSM mejora la imagen original, y las regiones objetivas son claras. Sin embargo, muchos ruidos son producidos en la imagen resultado. MSNTH mejora el contraste de la imagen. Las regiones objetivasson claras y hay pocos ruidos en el resultado. Sin embargo, los detalles de la imagen en el fondo del oc\'eano y cielo no son claros. El algoritmo propuesto mejora la imagen original y las regiones objetivas.
 
@@ -484,14 +492,100 @@ HE, CLAHE, MSM, MSNTH y el algoritmo propuesto son realizados en diferentes tipo
 \begin{table}[h]
 \centering
 \tiny
-\caption{Comparaci\'on cuantitativa de mejoramiento de imagen infrarroja usando valor de $\gamma$}
+\caption{Promedio num\'erico obtenido de 200 im\'agenes infrarrojas a\'ereas t\'ermicas}
 \label{tabla_1}
+\begin{center}
+\begin{tabular}{ c c c c c c }
+\hline
+\textbf{Metodo} & \textbf{$\gamma$} & \textbf{PSNR} & \textbf{ENTROPIA} & \textbf{AMBE} & \textbf{CONTRASTE} \\
+\hline
+I & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+HE & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+CLAHE & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+MSNTH & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+PROPUESTO & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+\normalsize
+
+\begin{table}[h]
+\centering
+\tiny
+\caption{Promedio num\'erico obtenido de 200 im\'agenes infrarrojas a\'ereas t\'ermicas usando el algoritmo MSNTH}
+\label{tabla_2}
+\begin{center}
+\begin{tabular}{ c c c c c c }
+\hline
+\textbf{Iter.} & \textbf{$\gamma$} & \textbf{PSNR} & \textbf{ENTROPIA} & \textbf{AMBE} & \textbf{CONTRASTE} \\
+\hline
+1 & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+2 & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+3 & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+4 & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+5 & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+\normalsize
+
+\begin{table}[h]
+\centering
+\tiny
+\caption{Promedio num\'erico obtenido de 200 im\'agenes infrarrojas a\'ereas t\'ermicas usando el m\'etodo propuesto}
+\label{tabla_3}
+\begin{center}
+\begin{tabular}{ c c c c c c c c }
+\hline
+\textbf{Iter.} & \textbf{H1} & \textbf{H2} & \textbf{$\gamma$} & \textbf{PSNR} & \textbf{ENTROPIA} & \textbf{AMBE} & \textbf{CONTRASTE} \\
+\hline
+1 & 3x3 & 9x9 & 0.5313 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+2 & 5x5 & 17x17 & 0.5313 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+3 & 7x7 & 25x25 & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+4 & 9x9 & 33x33 & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+5 & 11x11 & 41x41 & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+\normalsize
+
+\begin{table}[h]
+\centering
+\tiny
+\caption{Promedio num\'erico obtenido de 200 im\'agenes infrarrojas a\'ereas t\'ermicas}
+\label{tabla_4}
+\begin{center}
+\begin{tabular}{ c c c c c c }
+\hline
+\textbf{Metodo} & \textbf{$\gamma$} & \textbf{PSNR} & \textbf{ENTROPIA} & \textbf{AMBE} & \textbf{CONTRASTE} \\
+\hline
+I & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+MSNTH & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+PROPUESTO & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+\normalsize
+
+\begin{table}[h]
+\centering
+\tiny
+\caption{Promedio num\'erico obtenido de 200 im\'agenes infrarrojas a\'ereas t\'ermicas usando el algoritmo MSNTH}
+\label{tabla_5}
 \begin{center}
 \begin{tabular}{ c c c c c c c }
 \hline
-& \textbf{Imagen Original} & \textbf{HE} & \textbf{CLAHE} & \textbf{MSM} & \textbf{MSNTH} & \textbf{Algoritmo propuesto}\\
+\textbf{Iter.} & \textbf{H1} & \textbf{$\gamma$} & \textbf{PSNR} & \textbf{ENTROPIA} & \textbf{AMBE} & \textbf{CONTRASTE} \\
 \hline
-$\gamma$ & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 & 0.1987\\
+1 & 3x3 & 0.5313 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+2 & 5x5 & 0.5313 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+3 & 7x7 & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+4 & 9x9 & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+5 & 11x11 & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
 \hline
 \end{tabular}
 \end{center}
