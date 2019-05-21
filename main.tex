@@ -499,11 +499,11 @@ HE, CLAHE, MSM, MSNTH y el algoritmo propuesto son realizados en diferentes tipo
 \hline
 \textbf{Metodo} & \textbf{$\gamma$} & \textbf{PSNR} & \textbf{ENTROPIA} & \textbf{AMBE} & \textbf{CONTRASTE} \\
 \hline
-I & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
-HE & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
-CLAHE & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
-MSNTH & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
-PROPUESTO & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+I & 0.274890385 & - & 5.54768713 & - & 33.858522195 \\
+HE & 0.331579905 & 10.850171705 & 4.752923205 & 39.757934795 & 63.919454285 \\
+CLAHE & 0.326299135 & 16.055268465 & 6.058243415 & 14.10628393 & 40.85365839 \\
+MSNTH & 0.220512345 & 19.221282145 & 5.789673855 & 7.37423809 & 36.953689485 \\
+PROPUESTO & \textbf{0.218490065} & \textbf{19.78241478} & \textbf{5.80280294} & \textbf{6.785838875} & \textbf{37.361427235} \\
 \hline
 \end{tabular}
 \end{center}
@@ -590,6 +590,87 @@ PROPUESTO & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
 \end{tabular}
 \end{center}
 \end{table}
+\normalsize
+
+\begin{table}[h]
+\centering
+\tiny
+\caption{Promedio num\'erico obtenido de 200 im\'agenes infrarrojas a\'ereas t\'ermicas usando el m\'etodo propuesto}
+\label{tabla_6}
+\begin{center}
+\begin{tabular}{ c c c c c c c c }
+\hline
+\textbf{Iter.} & \textbf{H1} & \textbf{H2} & \textbf{$\gamma$} & \textbf{PSNR} & \textbf{ENTROPIA} & \textbf{AMBE} & \textbf{CONTRASTE} \\
+\hline
+1 & 3x3 & 9x9 & 0.5313 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+2 & 3x3 & 17x17 & 0.5313 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+3 & 3x3 & 25x25 & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+4 & 3x3 & 33x33 & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+5 & 3x3 & 41x41 & 0.5314 & 0.3976 & 0.5740 & 0.3572 & 0.2224 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+\normalsize
+
+\begin{table}[h]
+\centering
+\tiny
+\caption{Promedio num\'erico obtenido de 200 im\'agenes infrarrojas a\'ereas t\'ermicas de la razon del m\'etodo propuesto sobre la imagen de la m\'etrica $\gamma$}
+\label{tabla_7}
+\begin{center}
+\begin{tabular}{ c c c c c c c }
+\hline
+&  &  &  & Iteraciones &  & \\
+\hline
+ &     & 1 & 2 & 3 & 4 & 5 \\
+\hline
+ & \vline \hspace{1} 0.1 \hspace{1} \vline & 0.055 & 0.041 & 0.053 & 0.063 & 0.069 \\
+ & \vline \hspace{1} 0.2 \hspace{1} \vline & 0.130 & 0.088 & 0.099 & 0.110 & 0.116 \\
+ & \vline \hspace{1} 0.3 \hspace{1} \vline & 0.215 & 0.159  & 0.169 & 0.180 & 0.186  \\
+ & \vline \hspace{1} 0.4 \hspace{1} \vline & 0.305 & 0.250 & 0.258 & 0.270 & 0.277 \\
+Pesos & \vline \hspace{1} 0.5 \hspace{1} \vline & 0.407 & 0.365 & 0.371 & 0.383 & 0.391   \\
+ & \vline \hspace{1} 0.6 \hspace{1} \vline & 0.520 & 0.492 & 0.498 & 0.510 & 0.516 \\
+ & \vline \hspace{1} 0.7 \hspace{1} \vline & 0.635 & 0.618 & 0.624 & 0.634 & 0.639 \\
+ & \vline \hspace{1} 0.8 \hspace{1} \vline & 0.714 & 0.709 & 0.716 & 0.724 & 0.728 \\
+ & \vline \hspace{1} 0.9 \hspace{1} \vline & 0.786 & 0.794 & 0.799 & 0.806 & 0.808 \\
+ & \vline \hspace{1} 1.0 \hspace{1} \vline & 0.847 & 0.864 & 0.868 & 0.874 & 0.924 \\
+\hline
+& $w_{1}$ & & $w_{2}=1.5$ & & $w_{3}=1.5$ &  \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\centering
+\tiny
+\caption{Promedio num\'erico obtenido de 200 im\'agenes infrarrojas a\'ereas t\'ermicas de la razon del m\'etodo MSNTH sobre la imagen de la m\'etrica $\gamma$}
+\label{tabla_8}
+\begin{center}
+\begin{tabular}{ c c c c c c c }
+\hline
+&  &  &  & Iteraciones &  & \\
+\hline
+ &     & 1 & 2 & 3 & 4 & 5 \\
+\hline
+ & \vline \hspace{1} 0.1 \hspace{1} \vline & 0.064 & 0.050 & 0.071 & 0.072 & 0.085 \\
+ & \vline \hspace{1} 0.2 \hspace{1} \vline & 0.111 & 0.095 & 0.120 & 0.119 & 0.134 \\
+ & \vline \hspace{1} 0.3 \hspace{1} \vline & 0.180 & 0.163  & 0.189 & 0.188 & 0.203  \\
+ & \vline \hspace{1} 0.4 \hspace{1} \vline & 0.269 & 0.252 & 0.278 & 0.277 & 0.292 \\
+Pesos & \vline \hspace{1} 0.5 \hspace{1} \vline & 0.382 & 0.365 & 0.390 & 0.388 & 0.404   \\
+ & \vline \hspace{1} 0.6 \hspace{1} \vline & 0.506 & 0.492 & 0.513 & 0.512 & 0.526 \\
+ & \vline \hspace{1} 0.7 \hspace{1} \vline & 0.625 & 0.617 & 0.633 & 0.634 & 0.644 \\
+ & \vline \hspace{1} 0.8 \hspace{1} \vline & 0.711 & 0.710 & 0.721 & 0.726 & 0.734 \\
+ & \vline \hspace{1} 0.9 \hspace{1} \vline & 0.789 & 0.797 & 0.805 & 0.815 & 0.820 \\
+ & \vline \hspace{1} 1.0 \hspace{1} \vline & 0.857 & 0.874 & 0.881 & 0.896 & 0.940 \\
+\hline
+& $w_{1}$ & & $w_{2}=1.5$ & & $w_{3}=1.5$ &  \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
 \normalsize
 
 La Tabla 1 muestra que, los valores de $\gamma$ del algoritmo propuesto es m\'as pequeño que otros algoritmos. Esto significa que, el algoritmo propuesto realiza mejor que otros algoritmos para el mejoramiento de im\'agenes infrarrojas, especialmente para mejorar detalles de im\'agenes \'utiles e importantes. Por lo tanto, el algoritmo propuesto podr\'ia ser usado para mejoramiento de imagen infrarroja.
